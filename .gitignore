@@ -1,0 +1,43 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Quarto
+/.quarto/
+_site/
+docs/
+
+# Data (if sensitive)
+**/data/raw/*
+!**/data/raw/.gitkeep
+**/data/processed/*.rds
+**/data/processed/*.csv
+!**/data/processed/.gitkeep
+
+# Figures (if auto-generated)
+**/figures/*.png
+**/figures/*.pdf
+**/figures/*.jpg
+!**/figures/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Large files
+*.zip
+*.tar.gz
+models/
+outputs/
+
+# Cache files
+*_cache/*
+*_files/*
+.quarto/*
