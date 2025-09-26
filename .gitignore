@@ -38,9 +38,10 @@ models/
 outputs/
 
 # Cache files
-*_cache/*
-*_files/*
+**/*_cache/*
+**/*_files/*
 .quarto/*
+site_libs/*
 
 # temp
 case-studies/01-avian-parasites/data/*

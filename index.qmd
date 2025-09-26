@@ -1,0 +1,73 @@
+# Overview
+
+This document contains detailed descriptions of the suplementary code for [@manuscript]. Three case studies are presented along with a simulation study.
+
+```{r}
+#| label: quarto-setup
+#| include: false
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  fig.width = 12,
+  fig.height = 9,
+  fig.align = "center",
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+options(progressr.enable = FALSE)
+```
+
+## Case Studies
+
+This repository demonstrates MrIML 2.0 across four ecological systems. Each case study is self-contained with data, code, and interpretation.
+
+### Case Study 1: Avian Blood Parasites
+
+Analysis of co-occurrence patterns in vector-borne parasites from New Caledonian birds. Demonstrates asymmetric associations and the relative importance of host abundance versus biotic interactions.
+
+**Key findings:** Host abundance is the primary driver, but parasite co-occurrence significantly improves predictions. Asymmetric associations reveal directional effects between parasite species.
+
+### Case Study 2: Forest Communities
+
+Multi-taxonomic analysis of beetles, birds, and plants across forest successional gradients. Compares assembly mechanisms among different taxonomic groups.
+
+**Key findings:** Environmental filtering dominates across all groups. Plant communities show strongest responses to successional gradients, while bird and beetle communities respond primarily to altitude and microclimate.
+
+### Case Study 3: Ostrich Gut Microbiome
+
+Microbiome development across three gut sections (ileum, caecum, colon) in juvenile ostriches. Examines age-dependent assembly and section-specific patterns.
+
+**Key findings:** Critical developmental window at 20-40 days post-hatching. Positive associations dominate across all gut sections, with age and weight as primary predictors.
+
+## Simulation study
+
+A simulation study.
+
+## Computing enviroment information
+
+```{r}
+#| echo: false
+#| output: false
+# Load required packages
+# Data manipulation
+library(tidyverse)
+library(DT)
+library(readxl)
+library(here)
+# Modeling
+library(mrIML)
+library(tidymodels)
+library(future)
+library(finetune)
+library(flashlight)
+# Plotting
+library(igraph)
+library(ggnetwork)
+library(cowplot)
+library(patchwork)
+```
+
+```{r}
+#| label: session-info
+sessionInfo()
+```

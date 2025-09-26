@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Fountain-Jones"
+    given-names: "Nicholas M."
+    orcid: "https://orcid.org/0000-0001-9248-8493"
+  - family-names: "Leadbetter"
+    given-names: "Ryan K."
+  - family-names: "Appaw"
+    given-names: "Raima Carol"
+  - family-names: "Alkhamis"
+    given-names: "Moh A"
+  - family-names: "Baker"
+    given-names: "Susan C."
+  - family-names: "Powell-Romero"
+    given-names: "Francisca"
+  - family-names: "Clark"
+    given-names: "Nicholas J."
+  - family-names: "Mayer"
+    given-names: "Michael"
+  - family-names: "Machado"
+    given-names: "Gustavo"
+  - family-names: "Videvall"
+    given-names: "Elin"
+title: "MrIML 2.0 Case Studies: Reproducible Workflows for Ecological Community Analysis"
+version: 1.0.0
+doi: 10.5281/zenodo.XXXXXXX
+date-released: 2024-08-08
+url: "https://github.com/yourusername/mrIML-case-studies"
+license: MIT

@@ -1,0 +1,38 @@
+project:
+  type: book
+
+book:
+  title: "MrIML 2.0 Case Studies"
+  author:
+    - name: "Nicholas M. Fountain-Jones"
+      orcid: "0000-0001-9248-8493"
+    - name: "Ryan K. Leadbetter"
+      orcid: "0000-0002-1942-3121"
+  date: "8/22/2025"
+  chapters:
+    - index.qmd
+    - part: "Case studies"
+      chapters:
+        - case-studies/01-avian-parasites/dummy.qmd
+        - case-studies/02-forest-communities/dummy.qmd
+        - case-studies/03-ostrich-microbiome/dummy.qmd
+    - part: "Simulation study" 
+      chapters:
+        - sim-study/dummy.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    fig-format: svg
+
+execute:
+  cache: true
+  fig-dev: svg
+  fig-height: 10
+  fig-width: 12
+  warnings: false
+
+

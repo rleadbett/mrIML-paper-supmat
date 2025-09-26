@@ -1,0 +1,124 @@
+# Co-occurance simulations
+
+```{r}
+#| message: false
+#| warning: false
+#| results: "hide"
+# Load required packages
+# Data manipulation
+library(here)
+library(readxl)
+library(tidyverse)
+library(DT)
+# Modeling
+library(mrIML)
+library(tidymodels)
+library(future)
+library(finetune)
+library(flashlight)
+# Plotting
+library(igraph)
+library(ggnetwork)
+library(cowplot)
+library(patchwork)
+
+# Load custom functions
+source(here("R-functions", "select_variables.r"))
+source(here("R-functions", "plot_network.r"))
+
+# Set random seed
+set.seed(132)
+
+# Set up parallel processing
+n_cores <- parallel::detectCores()
+plan("multicore", workers = n_cores - 2)
+
+# Load simulated data
+source(
+  here("sim-study", "symetric-sims.r")
+)
+```
+
+```{r}
+network_size <- 20
+k_average <- 4
+
+simulated_network <- generateM_specific_type(
+  nn = network_size,
+  k_ave = k_average,
+  type.network = "random",
+  type.interact = "mix",
+  interact.str.max = 0.4,
+  mix.compt.ratio = 0.5
+)
+true_network <- simulated_network[[1]]
+M <- simulated_network[[2]]
+```
+
+
+```{r}
+library(seqtime)
+## plot population dynamics
+y <- rpois(network_size, lambda = 100) #initial abundance
+r <- runif(network_size) #growth rates
+res <- glv(network_size, M, r, y)
+tsplot(10 * res[, 20:1000], time.given = T)
+```
+
+```{r}
+data <- generateDataSet(
+  300,
+  M,
+  count = network_size * 10000,
+  mode = 4
+) %>%
+  as.data.frame() |>
+  t() |>
+  mutate(
+    across(everything(), ~ ifelse(. < 1, yes = 0, no = 1))
+  )
+```
+
+
+```{r}
+Y <- filterRareCommon(data, lower = 0.01, higher = 0.99)
+X1 <- Y
+```
+
+```{r}
+model_rf <- rand_forest(
+    trees = 100,
+    mode = "classification",
+    mtry = tune(),
+    min_n = tune()
+  ) %>%
+  set_engine("randomForest")
+```
+
+```{r}
+yhats_rf_sim <- mrIMLpredicts(
+  Y = Y,
+  X = NULL,
+  X1 = X1,
+  Model = model_rf,
+  prop = 0.7,
+  k = 5,
+  racing = TRUE
+)
+```
+
+```{r}
+bs_sim <- mrBootstrap(yhats_rf_sim)
+```
+
+```{r}
+assoc_net <- mrCoOccurNet(bs_sim)
+```
+
+## Mutualistic
+
+## Competitive
+
+## Mixed
+
+# Asymetric simulations
