@@ -41,3 +41,6 @@ outputs/
 *_cache/*
 *_files/*
 .quarto/*
+
+# temp
+case-studies/01-avian-parasites/data/*
