@@ -41,7 +41,7 @@ outputs/
 **/*_cache/*
 **/*_files/*
 .quarto/*
-
+!_book/case-studies/**/*_files/figure-html/*.svg
 site_libs/*
 
 # temp
