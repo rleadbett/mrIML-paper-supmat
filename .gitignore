@@ -41,6 +41,7 @@ outputs/
 **/*_cache/*
 **/*_files/*
 .quarto/*
+
 site_libs/*
 
 # temp

@@ -1,0 +1,261 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MrIML 2.0 Case Studies",
+    "section": "",
+    "text": "1 Overview\nThis document contains detailed descriptions of the suplementary code for (Fountain-Jones et al. 2024). Three case studies are presented along with a simulation study.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#case-studies",
+    "href": "index.html#case-studies",
+    "title": "MrIML 2.0 Case Studies",
+    "section": "1.1 Case Studies",
+    "text": "1.1 Case Studies\nThis repository demonstrates MrIML 2.0 across four ecological systems. Each case study is self-contained with data, code, and interpretation.\n\n1.1.1 Case Study 1: Avian Blood Parasites\nAnalysis of co-occurrence patterns in vector-borne parasites from New Caledonian birds. Demonstrates asymmetric associations and the relative importance of host abundance versus biotic interactions.\nKey findings: Host abundance is the primary driver, but parasite co-occurrence significantly improves predictions. Asymmetric associations reveal directional effects between parasite species.\n\n\n1.1.2 Case Study 2: Forest Communities\nMulti-taxonomic analysis of beetles, birds, and plants across forest successional gradients. Compares assembly mechanisms among different taxonomic groups.\nKey findings: Environmental filtering dominates across all groups. Plant communities show strongest responses to successional gradients, while bird and beetle communities respond primarily to altitude and microclimate.\n\n\n1.1.3 Case Study 3: Ostrich Gut Microbiome\nMicrobiome development across three gut sections (ileum, caecum, colon) in juvenile ostriches. Examines age-dependent assembly and section-specific patterns.\nKey findings: Critical developmental window at 20-40 days post-hatching. Positive associations dominate across all gut sections, with age and weight as primary predictors.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#simulation-study",
+    "href": "index.html#simulation-study",
+    "title": "MrIML 2.0 Case Studies",
+    "section": "1.2 Simulation study",
+    "text": "1.2 Simulation study\nA simulation study.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#computing-enviroment-information",
+    "href": "index.html#computing-enviroment-information",
+    "title": "MrIML 2.0 Case Studies",
+    "section": "1.3 Computing enviroment information",
+    "text": "1.3 Computing enviroment information\n\nsessionInfo()\n#&gt; R version 4.5.1 (2025-06-13)\n#&gt; Platform: aarch64-apple-darwin20\n#&gt; Running under: macOS Sequoia 15.6\n#&gt; \n#&gt; Matrix products: default\n#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \n#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n#&gt; \n#&gt; locale:\n#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n#&gt; \n#&gt; time zone: Australia/Hobart\n#&gt; tzcode source: internal\n#&gt; \n#&gt; attached base packages:\n#&gt; [1] stats     graphics  grDevices datasets  utils     methods   base     \n#&gt; \n#&gt; other attached packages:\n#&gt;  [1] patchwork_1.3.1    cowplot_1.2.0      ggnetwork_0.5.13   igraph_2.1.4      \n#&gt;  [5] flashlight_0.9.0   finetune_1.2.1     future_1.67.0      yardstick_1.3.2   \n#&gt;  [9] workflowsets_1.1.1 workflows_1.2.0    tune_1.3.0         rsample_1.3.1     \n#&gt; [13] recipes_1.3.1      parsnip_1.3.2      modeldata_1.5.0    infer_1.0.9       \n#&gt; [17] dials_1.4.1        scales_1.4.0       broom_1.0.9        tidymodels_1.3.0  \n#&gt; [21] mrIML_2.1.0        here_1.0.1         readxl_1.4.5       DT_0.33           \n#&gt; [25] lubridate_1.9.4    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4       \n#&gt; [29] purrr_1.1.0        readr_2.1.5        tidyr_1.3.1        tibble_3.3.0      \n#&gt; [33] ggplot2_3.5.2      tidyverse_2.0.0   \n#&gt; \n#&gt; loaded via a namespace (and not attached):\n#&gt;  [1] rlang_1.1.6         magrittr_2.0.3      furrr_0.3.1        \n#&gt;  [4] compiler_4.5.1      vctrs_0.6.5         lhs_1.2.0          \n#&gt;  [7] pkgconfig_2.0.3     fastmap_1.2.0       backports_1.5.0    \n#&gt; [10] rmarkdown_2.29      prodlim_2025.04.28  tzdb_0.5.0         \n#&gt; [13] xfun_0.52           jsonlite_2.0.0      parallel_4.5.1     \n#&gt; [16] R6_2.6.1            stringi_1.8.7       RColorBrewer_1.1-3 \n#&gt; [19] parallelly_1.45.1   rpart_4.1.24        cellranger_1.1.0   \n#&gt; [22] Rcpp_1.1.0          iterators_1.0.14    knitr_1.50         \n#&gt; [25] future.apply_1.20.0 Matrix_1.7-3        splines_4.5.1      \n#&gt; [28] nnet_7.3-20         timechange_0.3.0    tidyselect_1.2.1   \n#&gt; [31] rstudioapi_0.17.1   yaml_2.3.10         timeDate_4041.110  \n#&gt; [34] codetools_0.2-20    listenv_0.9.1       lattice_0.22-7     \n#&gt; [37] withr_3.0.2         evaluate_1.0.4      survival_3.8-3     \n#&gt; [40] pillar_1.11.0       renv_1.1.5          foreach_1.5.2      \n#&gt; [43] generics_0.1.4      rprojroot_2.1.0     hms_1.1.3          \n#&gt; [46] globals_0.18.0      class_7.3-23        glue_1.8.0         \n#&gt; [49] tools_4.5.1         data.table_1.17.8   gower_1.0.2        \n#&gt; [52] grid_4.5.1          ipred_0.9-15        cli_3.6.5          \n#&gt; [55] DiceDesign_1.10     lava_1.8.1          gtable_0.3.6       \n#&gt; [58] GPfit_1.0-9         digest_0.6.37       htmlwidgets_1.6.4  \n#&gt; [61] farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4    \n#&gt; [64] hardhat_1.4.1       MASS_7.3-65\n\n\n\n\n\nFountain-Jones, Nicholas M, Raima Carol Appaw, Moh A Alkhamis, Susan C Baker, Francisca Powell-Romero, Nicholas J Clark, Michael Mayer, Gustavo Machado, and Elin Videvall. 2024. “Advancing Ecological Community Analysis with MrIML 2.0: Unravelling Taxa Associations Through Interpretable Machine Learning.” Molecular Ecology Resources. https://doi.org/10.22541/au.172676147.77148600/v1.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html",
+    "href": "case-studies/01-avian-parasites/dummy.html",
+    "title": "2  Avian blood parasites",
+    "section": "",
+    "text": "2.1 Model definition\nThis case study demonstrates the application of MrIML 2.0 to a small dataset of vector-borne blood parasites in New Caledonian birds. We analyze presence/absence data from four parasite species:\nThe dataset includes 449 individual birds and a covariate representing the proportion of captures attributed to Zosterops spp. at each site, serving as a proxy for host relative abundance.\nTo prepare the data for multi-response modeling, we separate it into Y (response), X (predictors), and X1(co-occurrence predictors). This is how data is parsed to mrIML.\nWe formulate three models of community assembly to compare the relative importance of co-occurrence versus environmental effects:\nHowever, all three of these model configerations utilise the same base random forest model specified using tidymodels.\n# Define random forest model\nmodel_rf &lt;- rand_forest(\n  trees = 1000,\n  mode = \"classification\",\n  mtry = tune(),\n  min_n = tune()\n) %&gt;%\n  set_engine(\"randomForest\")",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#model-definition",
+    "href": "case-studies/01-avian-parasites/dummy.html#model-definition",
+    "title": "2  Avian blood parasites",
+    "section": "",
+    "text": "Parasite co-occurrence only (just X₁, no other covariates)\nHost abundance only (just X, the ‘host abundance model’)\nCombined model (both X₁ and X, co-occurrence + host abundance)\n\n\n\n\n2.1.1 Model 1: Combined model (co-occurrence + host abundance)\n\nyhats_rf_combined &lt;- mrIMLpredicts(\n  X = X,\n  Y = Y,\n  X1 = X1,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.7,\n  k = 5,\n  racing = TRUE\n)\n\n\n\n2.1.2 Model 2: Host abundance only\n\nyhats_rf_nox1 &lt;- mrIMLpredicts(\n  X = X,\n  Y = Y,\n  X1 = NULL,\n  Model = model_rf,\n  balance_data = 'down',\n  tune_grid_size = 5,\n  prop = 0.7,\n  k = 5,\n  racing = TRUE\n)\n\n\n\n2.1.3 Model 3: Co-occurrence only\n\nyhats_rf_nox &lt;- mrIMLpredicts(\n  X = NULL,\n  Y = Y,\n  X1 = X1,\n  Model = model_rf,\n  balance_data = 'down',\n  tune_grid_size = 5,\n  prop = 0.7,\n  k = 5,\n  racing = TRUE\n)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#model-performance",
+    "href": "case-studies/01-avian-parasites/dummy.html#model-performance",
+    "title": "2  Avian blood parasites",
+    "section": "2.2 Model performance",
+    "text": "2.2 Model performance\nThe proformance of each model for the diferen taxa can be explored using mrIMLperformance(). Below is an example for the combined model.\n\nModelPerf_combined &lt;- mrIMLperformance(yhats_rf_combined)\nModelPerf_combined$model_performance\n\n# A tibble: 4 × 8\n  response     model_name roc_AUC   mcc sensitivity   ppv specificity prevalence\n  &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;\n1 Hkillangoi   rand_fore…   0.817 0.224       0.966 0.898       0.188     0.116 \n2 Hzosteropis  rand_fore…   0.890 0.676       0.897 0.916       0.789     0.265 \n3 Microfilaria rand_fore…   0.954 0.544       0.992 0.954       0.4       0.0980\n4 Plas         rand_fore…   0.838 0.449       0.916 0.875       0.5       0.196 \n\n\nWe compare the three model configerations against one another based on average AUC.\n\n# Evaluate model performance\nModelPerf_noX1 &lt;- mrIMLperformance(yhats_rf_nox1)\nModelPerf_noX &lt;- mrIMLperformance(yhats_rf_nox)\n\ntibble(\n  Model = c(\n    \"Combined model\",\n    \"Host abundance only\",\n    \"Co-occurrence only\"\n  ),\n  AUC = c(\n    ModelPerf_combined$model_performance$roc_AUC %&gt;%\n      mean(),\n    ModelPerf_noX1$model_performance$roc_AUC %&gt;%\n      mean(),\n    ModelPerf_noX$model_performance$roc_AUC %&gt;%\n      mean()\n  ) %&gt;%\n    round(., 3)\n)\n\n# A tibble: 3 × 2\n  Model                 AUC\n  &lt;chr&gt;               &lt;dbl&gt;\n1 Combined model      0.875\n2 Host abundance only 0.841\n3 Co-occurrence only  0.694\n\n\nThe combined model shows improved performance over the individual components, suggesting that both co-occurrence patterns and host abundance contribute to parasite distribution patterns, however this is a small dataset and so there is significant variation in the metric depending on the cross-validation and test-training split.",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#bootstrap-analysis-for-uncertainty-estimation",
+    "href": "case-studies/01-avian-parasites/dummy.html#bootstrap-analysis-for-uncertainty-estimation",
+    "title": "2  Avian blood parasites",
+    "section": "2.3 Bootstrap Analysis for Uncertainty Estimation",
+    "text": "2.3 Bootstrap Analysis for Uncertainty Estimation\nFrom here on, we focus on the combined model. However, we can use bootstraping to capture the uncertainty.\n\n# Run bootstrap analysis for uncertainty estimation\nbs_avian &lt;- yhats_rf_combined %&gt;%\n  mrBootstrap(num_bootstrap = 100)\n\n\n# Calculate variable importance with bootstrap confidence intervals\nbs_impVI &lt;- mrVip(\n  yhats_rf_combined,\n  mrBootstrap_obj = bs_avian,\n  threshold = 0.0,\n  global_top_var = 10,\n  local_top_var = 5,\n  model_perf = ModelPerf_combined\n)\n\n# Display variable importance plot\nbs_impVI[[3]]",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#partial-dependence-analysis",
+    "href": "case-studies/01-avian-parasites/dummy.html#partial-dependence-analysis",
+    "title": "2  Avian blood parasites",
+    "section": "2.4 Partial Dependence Analysis",
+    "text": "2.4 Partial Dependence Analysis\n\n# Create bootstrapped partial dependence plots for Plasmodium\npds &lt;- mrPdPlotBootstrap(\n  yhats_rf_combined,\n  mrBootstrap_obj = bs_avian,\n  vi_obj = bs_impVI,\n  target = 'Plas',\n  global_top_var = 5\n)\n\n# Display partial dependence plots\npds[[2]]",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#environmental-covariate-effects",
+    "href": "case-studies/01-avian-parasites/dummy.html#environmental-covariate-effects",
+    "title": "2  Avian blood parasites",
+    "section": "2.5 Environmental Covariate Effects",
+    "text": "2.5 Environmental Covariate Effects\n\n# Examine the relationship between host abundance and parasite occurrence\ncovar &lt;- mrCovar(\n  yhats_rf_combined,\n  var = 'scale.prop.zos',\n  sdthresh = 0.01\n)\n\n# Display the three components of covariate analysis\ncovar[[1]] / covar[[2]] / covar[[3]]",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#interaction-analysis",
+    "href": "case-studies/01-avian-parasites/dummy.html#interaction-analysis",
+    "title": "2  Avian blood parasites",
+    "section": "2.6 Interaction Analysis",
+    "text": "2.6 Interaction Analysis\n\n# Analyze feature interactions using H-statistics\nint_ &lt;- mrInteractions(\n  yhats_rf_combined,\n  num_bootstrap = 100,\n  feature = 'Plas',\n  top_int = 10\n)\n\n# Display interaction plots\nint_[[1]] / int_[[2]] / int_[[3]]",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#shap-analysis-for-individual-predictions",
+    "href": "case-studies/01-avian-parasites/dummy.html#shap-analysis-for-individual-predictions",
+    "title": "2  Avian blood parasites",
+    "section": "2.7 SHAP Analysis for Individual Predictions",
+    "text": "2.7 SHAP Analysis for Individual Predictions\n\n# Perform SHAP analysis for detailed feature attribution\nshap_results &lt;- mrShapely(\n  yhats_rf_combined,\n  taxa = \"Plas\",\n  plot_feature_effects = TRUE,\n  plot_dependencies = TRUE,\n  plot_2D_dependencies = FALSE\n)\n\nExact Kernel SHAP values\n\n\n\n# Display SHAP results\nif (!is.null(shap_results$feature_effects)) {\n  shap_results$feature_effects\n}\n\n$Plas",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/01-avian-parasites/dummy.html#co-occurrence-network-construction",
+    "href": "case-studies/01-avian-parasites/dummy.html#co-occurrence-network-construction",
+    "title": "2  Avian blood parasites",
+    "section": "2.8 Co-occurrence Network Construction",
+    "text": "2.8 Co-occurrence Network Construction\n\n# Build co-occurrence network from bootstrap results\nassoc_net &lt;- mrCoOccurNet(bs_avian)\n\nplot_network(\n  assoc_net,\n  strength_threash = 0.05,\n  network_title = \"Parasite Co-occurrence Network\"\n)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Avian blood parasites</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/02-forest-communities/dummy.html",
+    "href": "case-studies/02-forest-communities/dummy.html",
+    "title": "3  Forest communities: beetles, birds and plants",
+    "section": "",
+    "text": "3.1 Data Preparation\nThis case study demonstrates MrIML 2.0 on a larger dataset with multiple taxonomic groups across a forest successional gradient. We analyze 144 plots established across forest age categories:\nAt each plot, we recorded ground-active beetles, plants, and birds, along with environmental covariates including coarse wood debris, leaf litter depth, and soil variables (pH, conductivity).\nraw_predictors &lt;- read_excel(\n  file.path(data_dir, \"Site_covariates_decision_making_4.xlsx\"),\n  sheet = 4\n) %&gt;%\n  column_to_rownames(var = \"plot_code\") %&gt;%\n  rename_all(~ gsub(\" \", \"_\", .)) %&gt;%\n  dplyr::select(-plot_code_T_D, -Transect)\n\ndatatable(raw_predictors)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forest communities: beetles, birds and plants</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/02-forest-communities/dummy.html#data-preparation",
+    "href": "case-studies/02-forest-communities/dummy.html#data-preparation",
+    "title": "3  Forest communities: beetles, birds and plants",
+    "section": "",
+    "text": "BeetlesBirdsPlants\n\n\n\nraw_data_beetles &lt;- read_excel(\n  file.path(data_dir, \"all_taxa_all_sp_mat_sp.xlsx\"),\n  sheet = \"beetles_all\",\n) %&gt;%\n  dplyr::select(-Site, -Distance, -Transect, -Age) %&gt;%\n  rename_all(~ gsub(\" \", \"_\", .)) %&gt;%\n  column_to_rownames(var = \"Plot\") %&gt;%\n  mutate_all(~ ifelse(. &gt; 0, 1, .))\n\ndatatable(raw_data_beetles)\n\n\n\n\n\n\n\n\nraw_data_birds &lt;- read_excel(\n  file.path(data_dir, \"all_taxa_all_sp_mat_sp.xlsx\"),\n  sheet = \"birds_all\"\n) %&gt;%\n  dplyr::select(-Site, -Distance, -Transect, -Age) %&gt;%\n  rename_all(~ gsub(\" \", \"_\", .)) %&gt;%\n  column_to_rownames(var = \"Plot\") %&gt;%\n  mutate_all(~ ifelse(. &gt; 0, 1, .))\n\ndatatable(raw_data_birds)\n\n\n\n\n\n\n\n\nraw_data_plants &lt;- read_excel(\n  file.path(data_dir, \"all_taxa_all_sp_mat_sp.xlsx\"),\n  sheet = \"plants_all\"\n) %&gt;%\n  dplyr::select(-Site, -Distance, -Transect, -Age) %&gt;%\n  rename_all(~ gsub(\" \", \"_\", .)) %&gt;%\n  column_to_rownames(var = \"Plot\") %&gt;%\n  mutate_all(~ ifelse(. &gt; 0, 1, .))\n\ndatatable(raw_data_plants)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forest communities: beetles, birds and plants</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/02-forest-communities/dummy.html#model",
+    "href": "case-studies/02-forest-communities/dummy.html#model",
+    "title": "3  Forest communities: beetles, birds and plants",
+    "section": "3.2 Model",
+    "text": "3.2 Model\nThis analysis uses a random forrest model.\n\nmodel_rf &lt;- rand_forest(\n  trees = 1000,\n  mode = \"classification\",\n  mtry = tune(),\n  min_n = tune()\n) %&gt;%\n  set_engine(\"randomForest\")",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forest communities: beetles, birds and plants</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/02-forest-communities/dummy.html#beetle-community-analysis",
+    "href": "case-studies/02-forest-communities/dummy.html#beetle-community-analysis",
+    "title": "3  Forest communities: beetles, birds and plants",
+    "section": "3.3 Beetle Community Analysis",
+    "text": "3.3 Beetle Community Analysis\nPreparing the X and Y matrix for mrIML.\n\n# Filter rare and common species (20-70% prevalence)\nY_beetles &lt;- filterRareCommon(raw_data_beetles, lower = 0.2, higher = 0.7)\n\n# Prepare environmental predictors\nX_beetles &lt;- raw_predictors %&gt;%\n  dplyr::select(\n    -Beetles_S_Mat_Indval2,\n    -Beetle_S_Total,\n    -dist_regrowth,\n    -Age,\n    -Beetles_Mat_Ratio,\n    -Birds_S_Mat_EFL,\n    -Birds_S_Total,\n    -Birds_Mat_Ratio,\n    -slope_f_Jayne,\n    -aspect_f_Jayne\n  )\n\n# Convert categorical variables\nX_beetles$Site &lt;- as.factor(X_beetles$Site)\nX_beetles$geol_Jayne &lt;- as.factor(X_beetles$geol_Jayne)\n\n# Variable selection\nvar_sel_beetles &lt;- select_variables(Y = Y_beetles, X = X_beetles)\nX_beetles &lt;- var_sel_beetles[[2]]\n\n# Remove site for model comparison\nX_beetles$Site &lt;- NULL\n\n# Co-occurrence matrix\nX1_beetles &lt;- Y_beetles\n\n\n3.3.1 Beetle Model Configuration and Training\n\n# Model 1: Environment only\nyhats_beetles_env &lt;- mrIMLpredicts(\n  X = X_beetles,\n  Y = Y_beetles,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\nSetting dummy = TRUE because X contains factors.\n\n\n→ A | warning: No control observations were detected in `truth` with control level '1'.\n\n\nThere were issues with some computations   A: x1\n\n\nThere were issues with some computations   A: x10\n\n\n\n\n# Model 2: Co-occurrence only\nyhats_beetles_cooccur &lt;- mrIMLpredicts(\n  Y = Y_beetles,\n  X1 = X1_beetles,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\n# Model 3: Combined\nyhats_beetles_combined &lt;- mrIMLpredicts(\n  X = X_beetles,\n  Y = Y_beetles,\n  X1 = X1_beetles,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\nSetting dummy = TRUE because X contains factors.\n\n\n\n\n3.3.2 Beetle Performance Assessment\n\n# Evaluate model performance\nModelPerf_beetles_env &lt;- mrIMLperformance(yhats_beetles_env)\nModelPerf_beetles_cooccur &lt;- mrIMLperformance(yhats_beetles_cooccur)\nModelPerf_beetles_combined &lt;- mrIMLperformance(yhats_beetles_combined)\n\n# Performance comparison\nperf_comparison_beetles &lt;- mrPerformancePlot(\n  ModelPerf1 = ModelPerf_beetles_combined,\n  ModelPerf2 = ModelPerf_beetles_env,\n  mode = \"classification\"\n)\n\nperf_comparison_beetles$performance_plot +\n  labs(title = \"Beetle Community Model Performance\")\n\n# Summary table\nbeetle_performance &lt;- data.frame(\n  Model = c(\"Environment only\", \"Co-occurrence only\", \"Combined\"),\n  MCC = c(\n    ModelPerf_beetles_env[[2]],\n    ModelPerf_beetles_cooccur[[2]],\n    ModelPerf_beetles_combined[[2]]\n  )\n)\nbeetle_performance\n\n\n\n3.3.3 Beetle Variable Importance and Associations\n\n# Bootstrap analysis\nbs_beetles &lt;- mrBootstrap(yhats_beetles_combined, num_bootstrap = 100)\n\n\n# Variable importance\nvi_beetles &lt;- mrVip(\n  yhats_beetles_combined,\n  mrBootstrap_obj = bs_beetles,\n  threshold = 0.5,\n  global_top_var = 10\n)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nvi_beetles[[3]] +\n  labs(title = \"Beetle Community Variable Importance\")\n\n\n\n\n\n\n\n\n\n# Co-occurrence network\nassoc_net_beetles &lt;- mrCoOccurNet(bs_beetles)\nplot_network(\n  assoc_net_beetles,\n  strength_threash = 0.1,\n  network_title = \"Beetle Co-occurrence Network\"\n)\n\nWarning in plot_network(assoc_net_beetles, strength_threash = 0.1,\nnetwork_title = \"Beetle Co-occurrence Network\"): No effects above the specified\nthreashold of 0.1\n\n\nNULL\n\n\n\n\n3.3.4 Beetle interactions\n\ninteractions_rf &lt;- yhats_beetles_combined %&gt;%\n  mrInteractions(num_bootstrap = 10)\n\ninteractions_rf[[1]]",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forest communities: beetles, birds and plants</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/02-forest-communities/dummy.html#bird-community-analysis",
+    "href": "case-studies/02-forest-communities/dummy.html#bird-community-analysis",
+    "title": "3  Forest communities: beetles, birds and plants",
+    "section": "3.4 Bird community analysis",
+    "text": "3.4 Bird community analysis\n\n# Prepare bird data (similar structure to beetles)\nY_birds &lt;- filterRareCommon(raw_data_birds, lower = 0.2, higher = 0.7)\n\n# Use same environmental predictors but select relevant variables\n# Prepare environmental predictors\nX_birds &lt;- raw_predictors %&gt;%\n  dplyr::select(\n    -Beetles_S_Mat_Indval2,\n    -Beetle_S_Total,\n    -dist_regrowth,\n    -Age,\n    -Beetles_Mat_Ratio,\n    -Birds_S_Mat_EFL,\n    -Birds_S_Total,\n    -Birds_Mat_Ratio,\n    -slope_f_Jayne,\n    -aspect_f_Jayne\n  )\n\n# Convert categorical variables\nX_birds$Site &lt;- as.factor(X_birds$Site)\nX_birds$geol_Jayne &lt;- as.factor(X_birds$geol_Jayne)\n\n# Remove site for model comparison\nX_birds$Site &lt;- NULL\nvar_sel_birds &lt;- select_variables(Y = Y_birds, X = X_birds)\nX_birds &lt;- var_sel_birds[[2]]\nX1_birds &lt;- Y_birds\n\n# Train models\nyhats_birds_env &lt;- mrIMLpredicts(\n  X = X_birds,\n  Y = Y_birds,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\nSetting dummy = TRUE because X contains factors.\n\nyhats_birds_cooccur &lt;- mrIMLpredicts(\n  Y = Y_birds,\n  X1 = X1_birds,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\nyhats_birds_combined &lt;- mrIMLpredicts(\n  X = X_birds,\n  Y = Y_birds,\n  X1 = X1_birds,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\nSetting dummy = TRUE because X contains factors.\n\n\n→ A | warning: No control observations were detected in `truth` with control level '1'.\n\n\nThere were issues with some computations   A: x1\n\n\nThere were issues with some computations   A: x10\n\n\n\n\n# Performance assessment\nModelPerf_birds_env &lt;- mrIMLperformance(yhats_birds_env)\nModelPerf_birds_cooccur &lt;- mrIMLperformance(yhats_birds_cooccur)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nModelPerf_birds_combined &lt;- mrIMLperformance(yhats_birds_combined)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\n# Performance comparison\nperf_comparison_birds &lt;- mrPerformancePlot(\n  ModelPerf1 = ModelPerf_birds_combined,\n  ModelPerf2 = ModelPerf_birds_env,\n  mode = \"classification\"\n)\n\n\n# Plot performance\nperf_comparison_birds$performance_plot +\n  labs(title = \"Bird Community Model Performance\")\n\n\n\n\n\n\n\n\n\n# Performance summary table\nbird_performance &lt;- data.frame(\n  Model = c(\"Environment only\", \"Co-occurrence only\", \"Combined\"),\n  MCC = c(\n    ModelPerf_birds_env[[2]],\n    ModelPerf_birds_cooccur[[2]],\n    ModelPerf_birds_combined[[2]]\n  )\n)\nbird_performance\n\n               Model        MCC\n1   Environment only 0.18650212\n2 Co-occurrence only 0.04416037\n3           Combined 0.28853921\n\n\n\n# Bootstrap analysis\nbs_birds &lt;- mrBootstrap(yhats_birds_combined, num_bootstrap = 100)\n\n# Variable importance\nvi_birds &lt;- mrVip(\n  yhats_birds_combined,\n  mrBootstrap_obj = bs_birds,\n  threshold = 0.5,\n  global_top_var = 10\n)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\n\n\n# Variable importance plot\nvi_birds[[3]] +\n  labs(title = \"Bird Community Variable Importance\")\n\n\n\n\n\n\n\n\n\n# Co-occurrence network\nassoc_net_birds &lt;- mrCoOccurNet(bs_birds)\nplot_network(\n  assoc_net_birds,\n  strength_threash = 0.1,\n  network_title = \"Bird Co-occurrence Network\"\n)\n\nWarning in plot_network(assoc_net_birds, strength_threash = 0.1, network_title\n= \"Bird Co-occurrence Network\"): No effects above the specified threashold of\n0.1\n\n\nNULL",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forest communities: beetles, birds and plants</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/02-forest-communities/dummy.html#plant-community-analysis",
+    "href": "case-studies/02-forest-communities/dummy.html#plant-community-analysis",
+    "title": "3  Forest communities: beetles, birds and plants",
+    "section": "3.5 Plant community analysis",
+    "text": "3.5 Plant community analysis\n\n# Prepare Plant data (similar structure to beetles)\nY_plants &lt;- filterRareCommon(raw_data_plants, lower = 0.2, higher = 0.7)\n\n# Use same environmental predictors but select relevant variables\n# Prepare environmental predictors\nX_plants &lt;- raw_predictors %&gt;%\n  dplyr::select(\n    -Beetles_S_Mat_Indval2,\n    -Beetle_S_Total,\n    -dist_regrowth,\n    -Age,\n    -Beetles_Mat_Ratio,\n    -Birds_S_Mat_EFL,\n    -Birds_S_Total,\n    -Birds_Mat_Ratio,\n    -slope_f_Jayne,\n    -aspect_f_Jayne,\n    -contains(\"Bryo\"),\n    -contains(\"Plant\"),\n    -contains(\"Moss\"),\n    -Vegetation_cover\n  ) %&gt;%\n  rename_with(~ gsub(\"Jayne\", \"\", .), contains(\"Jayne\"))\n\n# Convert categorical variables\nX_plants$Site &lt;- as.factor(X_plants$Site)\nX_plants$geol_ &lt;- as.factor(X_plants$geol_)\n\n# Remove site for model comparison\nX_plants$Site &lt;- NULL\nvar_sel_plants &lt;- select_variables(Y = Y_plants, X = X_plants)\nX_plants &lt;- var_sel_plants[[2]]\nX1_plants &lt;- Y_plants\n\n# Train models\nyhats_plants_env &lt;- mrIMLpredicts(\n  X = X_plants,\n  Y = Y_plants,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\nSetting dummy = TRUE because X contains factors.\n\n\n→ A | warning: No control observations were detected in `truth` with control level '1'.\n\n\nThere were issues with some computations   A: x1\n\n\nThere were issues with some computations   A: x2\n\n\n\n\nyhats_plants_cooccur &lt;- mrIMLpredicts(\n  Y = Y_plants,\n  X1 = X1_plants,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\n→ A | warning: No control observations were detected in `truth` with control level '1'.\n\n\nThere were issues with some computations   A: x1\n\n\nThere were issues with some computations   A: x10\n\n\n\n\nyhats_plants_combined &lt;- mrIMLpredicts(\n  X = X_plants,\n  Y = Y_plants,\n  X1 = X1_plants,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = TRUE\n)\n\nSetting dummy = TRUE because X contains factors.\n\n# Performance assessment\nModelPerf_plants_env &lt;- mrIMLperformance(yhats_plants_env)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nModelPerf_plants_cooccur &lt;- mrIMLperformance(yhats_plants_cooccur)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nModelPerf_plants_combined &lt;- mrIMLperformance(yhats_plants_combined)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\n# Performance comparison\nperf_comparison_plants &lt;- mrPerformancePlot(\n  ModelPerf1 = ModelPerf_plants_combined,\n  ModelPerf2 = ModelPerf_plants_env,\n  mode = \"classification\"\n)\n\n\n# Plot performance\nperf_comparison_plants$performance_plot +\n  labs(title = \"Bird Community Model Performance\")\n\n\n\n\n\n\n\n\n\n# Performance summary table\nplant_performance &lt;- data.frame(\n  Model = c(\"Environment only\", \"Co-occurrence only\", \"Combined\"),\n  MCC = c(\n    ModelPerf_plants_env[[2]],\n    ModelPerf_plants_cooccur[[2]],\n    ModelPerf_plants_combined[[2]]\n  )\n)\nplant_performance\n\n               Model       MCC\n1   Environment only 0.4011448\n2 Co-occurrence only 0.3982088\n3           Combined 0.4252313\n\n\n\n# Bootstrap analysis\nbs_plants &lt;- mrBootstrap(\n  yhats_plants_combined,\n  num_bootstrap = 100\n)\n\n# Variable importance\nvi_plants &lt;- mrVip(\n  yhats_plants_combined,\n  mrBootstrap_obj = bs_plants,\n  threshold = 0.5,\n  global_top_var = 10\n)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\n\n\n# Variable importance plot\nvi_plants[[3]] +\n  labs(title = \"Bird Community Variable Importance\")\n\n\n\n\n\n\n\n\n\n# Co-occurrence network\nassoc_net_plants &lt;- mrCoOccurNet(bs_plants)\nplot_network(\n  assoc_net_plants,\n  strength_threash = 0.1,\n  network_title = \"Plant Co-occurrence Network\",\n  nmds_layout = TRUE\n)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forest communities: beetles, birds and plants</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/03-ostrich-microbiome/dummy.html",
+    "href": "case-studies/03-ostrich-microbiome/dummy.html",
+    "title": "4  Ostrich gut microbiome",
+    "section": "",
+    "text": "4.1 Define tidymodel\nmodel_rf &lt;- rand_forest(\n  trees = 1000,\n  mode = \"classification\",\n  mtry = tune(),\n  min_n = tune()\n) %&gt;%\n  set_engine(\"randomForest\")",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ostrich gut microbiome</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/03-ostrich-microbiome/dummy.html#caecum",
+    "href": "case-studies/03-ostrich-microbiome/dummy.html#caecum",
+    "title": "4  Ostrich gut microbiome",
+    "section": "4.2 Caecum",
+    "text": "4.2 Caecum\n\n4.2.1 Model fitting\n\nX1_caecum &lt;- Y_caecumF\nX_caecum &lt;- X_caecum\nY_caecum &lt;- Y_caecumF\n\nyhats_rf_caecum_combined &lt;- mrIMLpredicts(\n  X = X_caecum,\n  Y = Y_caecum,\n  X1 = X1_caecum,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.7,\n  k = 5,\n  racing = F\n)\nyhats_rf_caecum_noX1 &lt;- mrIMLpredicts(\n  X = X_caecum,\n  Y = Y_caecum,\n  #X1=X1,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = F\n)\nyhats_rf_caecum_noX &lt;- mrIMLpredicts(\n  X = NULL,\n  Y = Y_caecum,\n  X1 = X1_caecum,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = F\n)\n\n\n\n4.2.2 Performance\n\nmodel_perf_caecum_combined &lt;- mrIMLperformance(yhats_rf_caecum_combined)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nmodel_perf_caecum_noX1 &lt;- mrIMLperformance(yhats_rf_caecum_noX1)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nmodel_perf_caecum_noX &lt;- mrIMLperformance(yhats_rf_caecum_noX)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\ndata.frame(\n  Model = c(\"Host characteristics\", \"Co-occurrence only\", \"Combined\"),\n  MCC = c(\n    model_perf_caecum_combined[[2]],\n    model_perf_caecum_noX1[[2]],\n    model_perf_caecum_noX[[2]]\n  )\n)\n\n                 Model       MCC\n1 Host characteristics 0.5076450\n2   Co-occurrence only 0.3980356\n3             Combined 0.4981362\n\n\n\n# Need to increase memory allowance for workers.\noptions(future.globals.maxSize = 10 * 1024^3)\nbootstrap_caecum_combined &lt;- mrBootstrap(\n  yhats_rf_caecum_combined,\n  num_bootstrap = 10\n)\n\nvip_caecum_combined &lt;- mrVip(\n  yhats_rf_caecum_combined,\n  bootstrap_caecum_combined\n)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nvip_caecum_combined[[3]]\n\n\n\n\n\n\n\n\n\nprofilePlot_pd_caecum &lt;- mrCovar(\n  yhats_rf_caecum_combined,\n  var = \"Age\",\n  sdthresh = 0.1\n)\nprofilePlot_pd_caecum[[1]]\n\n\n\n\n\n\n\n\n\n\n4.2.3 Co-occurance network\n\nassoc_net_caecum &lt;- mrCoOccurNet(bootstrap_caecum_combined)\nplot_network(\n  assoc_net_caecum,\n  strength_threash = 0.1,\n  network_title = \"Caecum Co-occurrence Network\",\n  nmds_layout = TRUE,\n  degree = TRUE,\n  group_colours = TRUE\n)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ostrich gut microbiome</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/03-ostrich-microbiome/dummy.html#colon",
+    "href": "case-studies/03-ostrich-microbiome/dummy.html#colon",
+    "title": "4  Ostrich gut microbiome",
+    "section": "4.3 Colon",
+    "text": "4.3 Colon\n\nX1_colon &lt;- Y_colonF\nX_colon &lt;- X_colon\nY_colon &lt;- Y_colonF\n\nyhats_rf_colon_combined &lt;- mrIMLpredicts(\n  X = X_colon,\n  Y = Y_colon,\n  X1 = X1_colon,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.7,\n  k = 5,\n  racing = F\n)\nyhats_rf_colon_noX1 &lt;- mrIMLpredicts(\n  X = X_colon,\n  Y = Y_colon,\n  #X1=X1,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = F\n)\nyhats_rf_colon_noX &lt;- mrIMLpredicts(\n  X = NULL,\n  Y = Y_colon,\n  X1 = X1_colon,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = F\n)\n\n\nmodel_perf_colon_combined &lt;- mrIMLperformance(yhats_rf_colon_combined)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nmodel_perf_colon_noX1 &lt;- mrIMLperformance(yhats_rf_colon_noX1)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nmodel_perf_colon_noX &lt;- mrIMLperformance(yhats_rf_colon_noX)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\ndata.frame(\n  Model = c(\"Host characteristics\", \"Co-occurrence only\", \"Combined\"),\n  MCC = c(\n    model_perf_colon_combined[[2]],\n    model_perf_colon_noX1[[2]],\n    model_perf_colon_noX[[2]]\n  )\n)\n\n                 Model       MCC\n1 Host characteristics 0.5154993\n2   Co-occurrence only 0.4121526\n3             Combined 0.5195719\n\n\n\n# Need to increase memory allowance for workers.\noptions(future.globals.maxSize = 10 * 1024^3)\nbootstrap_colon_combined &lt;- mrBootstrap(\n  yhats_rf_colon_combined,\n  num_bootstrap = 10\n)\n\nvip_colon_combined &lt;- mrVip(\n  yhats_rf_colon_combined,\n  bootstrap_colon_combined\n)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nvip_colon_combined[[3]]\n\n\n\n\n\n\n\n\n\nprofilePlot_pd_colon &lt;- mrCovar(\n  yhats_rf_colon_combined,\n  var = \"Age\",\n  sdthresh = 0.1\n)\nprofilePlot_pd_colon[[1]]\n\n\n\n\n\n\n\n\n\nassoc_net_colon &lt;- mrCoOccurNet(bootstrap_colon_combined)\nplot_network(\n  assoc_net_colon,\n  strength_threash = 0.1,\n  network_title = \"Caecum Co-occurrence Network\",\n  nmds_layout = TRUE,\n  degree = TRUE,\n  group_colours = TRUE\n)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ostrich gut microbiome</span>"
+    ]
+  },
+  {
+    "objectID": "case-studies/03-ostrich-microbiome/dummy.html#ileum",
+    "href": "case-studies/03-ostrich-microbiome/dummy.html#ileum",
+    "title": "4  Ostrich gut microbiome",
+    "section": "4.4 Ileum",
+    "text": "4.4 Ileum\n\nX1_ileum &lt;- Y_ileumF\nX_ileum &lt;- X_ileum\nY_ileum &lt;- Y_ileumF\n\nyhats_rf_ileum_combined &lt;- mrIMLpredicts(\n  X = X_ileum,\n  Y = Y_ileum,\n  X1 = X1_ileum,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.7,\n  k = 5,\n  racing = F\n)\nyhats_rf_ileum_noX1 &lt;- mrIMLpredicts(\n  X = X_ileum,\n  Y = Y_ileum,\n  #X1=X1,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = F\n)\nyhats_rf_ileum_noX &lt;- mrIMLpredicts(\n  X = NULL,\n  Y = Y_ileum,\n  X1 = X1_ileum,\n  Model = model_rf,\n  balance_data = 'no',\n  tune_grid_size = 5,\n  prop = 0.6,\n  k = 5,\n  racing = F\n)\n\n\nmodel_perf_ileum_combined &lt;- mrIMLperformance(yhats_rf_ileum_combined)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nmodel_perf_ileum_noX1 &lt;- mrIMLperformance(yhats_rf_ileum_noX1)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nmodel_perf_ileum_noX &lt;- mrIMLperformance(yhats_rf_ileum_noX)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\ndata.frame(\n  Model = c(\"Host characteristics\", \"Co-occurrence only\", \"Combined\"),\n  MCC = c(\n    model_perf_ileum_combined[[2]],\n    model_perf_ileum_noX1[[2]],\n    model_perf_ileum_noX[[2]]\n  )\n)\n\n                 Model       MCC\n1 Host characteristics 0.3168804\n2   Co-occurrence only 0.2903949\n3             Combined 0.3133663\n\n\n\n# Need to increase memory allowance for workers.\noptions(future.globals.maxSize = 10 * 1024^3)\nbootstrap_ileum_combined &lt;- mrBootstrap(\n  yhats_rf_ileum_combined,\n  num_bootstrap = 10\n)\n\nvip_ileum_combined &lt;- mrVip(\n  yhats_rf_ileum_combined,\n  bootstrap_ileum_combined\n)\n\nWarning: NAs produced when calculating MCC. This is common when there is a\nclass imbalance. Substituting NA values with zero.\n\nvip_ileum_combined\n\n\n\n\n\n\n\n\n\nprofilePlot_pd_ileum &lt;- mrCovar(\n  yhats_rf_ileum_combined,\n  var = \"Age\",\n  sdthresh = 0.1\n)\nprofilePlot_pd_ileum[[1]]\n\n\n\n\n\n\n\n\n\nassoc_net_ileum &lt;- mrCoOccurNet(bootstrap_ileum_combined)\nplot_network(\n  assoc_net_ileum,\n  strength_threash = 0.1,\n  network_title = \"Caecum Co-occurrence Network\",\n  nmds_layout = TRUE,\n  degree = TRUE,\n  group_colours = TRUE\n)",
+    "crumbs": [
+      "Case studies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Ostrich gut microbiome</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Fountain-Jones, Nicholas M, Raima Carol Appaw, Moh A Alkhamis, Susan C\nBaker, Francisca Powell-Romero, Nicholas J Clark, Michael Mayer, Gustavo\nMachado, and Elin Videvall. 2024. “Advancing Ecological Community\nAnalysis with MrIML 2.0: Unravelling Taxa Associations Through\nInterpretable Machine Learning.” Molecular Ecology\nResources. https://doi.org/10.22541/au.172676147.77148600/v1.",
+    "crumbs": [
+      "References"
+    ]
+  }
+]
