@@ -38,12 +38,13 @@ models/
 outputs/
 
 # Cache files
-**/*_cache/*
-**/*_files/*
 .quarto/*
 !_book/case-studies/**/*_files/figure-html/*.svg
+!_book/sim-study/**/*_files/figure-html/*.svg
 case-studies/**/*_files/
+sim-study/**/*_files/
 site_libs/*
+**/*_cache/*
 
 # temp
 case-studies/01-avian-parasites/data/*
