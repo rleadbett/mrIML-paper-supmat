@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Quarto](https://img.shields.io/badge/Made%20with-Quarto-blue.svg)](https://quarto.org/)
 
-Supplementary code for: **Fountain-Jones, N.M., Appaw, R.C., et al.** (2024). Advancing ecological community analysis with MrIML 2.0: Unravelling taxa associations through interpretable machine learning. *Molecular Ecology Resources*.
+Supplementary code for the preprint: **Fountain-Jones, N.M., Appaw, R.C., et al.** (2024). Advancing ecological community analysis with MrIML 2.0: Unravelling taxa associations through interpretable machine learning. DOI: 10.22541/au.172676147.77148600/v1
 
 This repository contains the code to reproduce the simulation study and the three case studies:
 

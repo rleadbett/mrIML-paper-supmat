@@ -266,9 +266,10 @@ shap_results <- mrShapely(
 
 ```{r}
 # Display SHAP results
-if (!is.null(shap_results$feature_effects)) {
-  shap_results$feature_effects
-}
+p <- (shap_results$feature_effects$Plas[[1]] + theme_minimal()) +
+  (shap_results$feature_effects$Plas[[1]] + theme_minimal()) +
+  plot_annotation("Plas") +
+  plot_layout(guides = "collect", axis_titles = "collect")
 ```
 
 ## Co-occurrence Network Construction
