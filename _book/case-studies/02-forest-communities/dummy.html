@@ -105,13 +105,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="../../site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="../../site_libs/datatables-binding-0.34.0/datatables.js"></script>
 <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="../../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
 
 
 </head>
@@ -186,8 +186,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Simulation study</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Simulation study</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sim-study/dummy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Co-occurance simulations</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -426,366 +439,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>There were issues with some computations   A: x1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>There were issues with some computations   A: x10</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 2: Co-occurrence only</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>yhats_beetles_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_beetles,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_beetles,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 3: Combined</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>yhats_beetles_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_beetles,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_beetles,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_beetles,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
-</div>
-</div>
-</section>
-<section id="beetle-performance-assessment" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="beetle-performance-assessment"><span class="header-section-number">3.3.2</span> Beetle Performance Assessment</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate model performance</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ModelPerf_beetles_env <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_beetles_env)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ModelPerf_beetles_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_beetles_cooccur)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ModelPerf_beetles_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_beetles_combined)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>perf_comparison_beetles <span class="ot">&lt;-</span> <span class="fu">mrPerformancePlot</span>(</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf1 =</span> ModelPerf_beetles_combined,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf2 =</span> ModelPerf_beetles_env,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"classification"</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>perf_comparison_beetles<span class="sc">$</span>performance_plot <span class="sc">+</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Beetle Community Model Performance"</span>)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary table</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>beetle_performance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Environment only"</span>, <span class="st">"Co-occurrence only"</span>, <span class="st">"Combined"</span>),</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCC =</span> <span class="fu">c</span>(</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    ModelPerf_beetles_env[[<span class="dv">2</span>]],</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    ModelPerf_beetles_cooccur[[<span class="dv">2</span>]],</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    ModelPerf_beetles_combined[[<span class="dv">2</span>]]</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>beetle_performance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="beetle-variable-importance-and-associations" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="beetle-variable-importance-and-associations"><span class="header-section-number">3.3.3</span> Beetle Variable Importance and Associations</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap analysis</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bs_beetles <span class="ot">&lt;-</span> <span class="fu">mrBootstrap</span>(yhats_beetles_combined, <span class="at">num_bootstrap =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>vi_beetles <span class="ot">&lt;-</span> <span class="fu">mrVip</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  yhats_beetles_combined,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrBootstrap_obj =</span> bs_beetles,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">global_top_var =</span> <span class="dv">10</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
-class imbalance. Substituting NA values with zero.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>vi_beetles[[<span class="dv">3</span>]] <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Beetle Community Variable Importance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="dummy_files/figure-html/unnamed-chunk-2-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Co-occurrence network</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>assoc_net_beetles <span class="ot">&lt;-</span> <span class="fu">mrCoOccurNet</span>(bs_beetles)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_network</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  assoc_net_beetles,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">strength_threash =</span> <span class="fl">0.1</span>,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">network_title =</span> <span class="st">"Beetle Co-occurrence Network"</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in plot_network(assoc_net_beetles, strength_threash = 0.1,
-network_title = "Beetle Co-occurrence Network"): No effects above the specified
-threashold of 0.1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
-</div>
-</div>
-</section>
-<section id="beetle-interactions" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="beetle-interactions"><span class="header-section-number">3.3.4</span> Beetle interactions</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>interactions_rf <span class="ot">&lt;-</span> yhats_beetles_combined <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrInteractions</span>(<span class="at">num_bootstrap =</span> <span class="dv">10</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>interactions_rf[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="dummy_files/figure-html/unnamed-chunk-4-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="bird-community-analysis" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="bird-community-analysis"><span class="header-section-number">3.4</span> Bird community analysis</h2>
-<div class="cell" data-messages="false">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare bird data (similar structure to beetles)</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Y_birds <span class="ot">&lt;-</span> <span class="fu">filterRareCommon</span>(raw_data_birds, <span class="at">lower =</span> <span class="fl">0.2</span>, <span class="at">higher =</span> <span class="fl">0.7</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use same environmental predictors but select relevant variables</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare environmental predictors</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>X_birds <span class="ot">&lt;-</span> raw_predictors <span class="sc">%&gt;%</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_S_Mat_Indval2,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetle_S_Total,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>dist_regrowth,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Age,</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_Mat_Ratio,</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Mat_EFL,</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Total,</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_Mat_Ratio,</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>slope_f_Jayne,</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>aspect_f_Jayne</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>X_birds<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_birds<span class="sc">$</span>Site)</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>X_birds<span class="sc">$</span>geol_Jayne <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_birds<span class="sc">$</span>geol_Jayne)</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove site for model comparison</span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>X_birds<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>var_sel_birds <span class="ot">&lt;-</span> <span class="fu">select_variables</span>(<span class="at">Y =</span> Y_birds, <span class="at">X =</span> X_birds)</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>X_birds <span class="ot">&lt;-</span> var_sel_birds[[<span class="dv">2</span>]]</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>X1_birds <span class="ot">&lt;-</span> Y_birds</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Train models</span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>yhats_birds_env <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_birds,</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_birds,</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>yhats_birds_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_birds,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_birds,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>yhats_birds_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_birds,</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_birds,</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_birds,</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>There were issues with some computations   A: x1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>There were issues with some computations   A: x10</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance assessment</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>ModelPerf_birds_env <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_birds_env)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>ModelPerf_birds_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_birds_cooccur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
-class imbalance. Substituting NA values with zero.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ModelPerf_birds_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_birds_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
-class imbalance. Substituting NA values with zero.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_birds <span class="ot">&lt;-</span> <span class="fu">mrPerformancePlot</span>(</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf1 =</span> ModelPerf_birds_combined,</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf2 =</span> ModelPerf_birds_env,</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"classification"</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot performance</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_birds<span class="sc">$</span>performance_plot <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Model Performance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="dummy_files/figure-html/unnamed-chunk-5-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance summary table</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>bird_performance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Environment only"</span>, <span class="st">"Co-occurrence only"</span>, <span class="st">"Combined"</span>),</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCC =</span> <span class="fu">c</span>(</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    ModelPerf_birds_env[[<span class="dv">2</span>]],</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    ModelPerf_birds_cooccur[[<span class="dv">2</span>]],</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    ModelPerf_birds_combined[[<span class="dv">2</span>]]</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>bird_performance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Model        MCC
-1   Environment only 0.18650212
-2 Co-occurrence only 0.04416037
-3           Combined 0.28853921</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap analysis</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>bs_birds <span class="ot">&lt;-</span> <span class="fu">mrBootstrap</span>(yhats_birds_combined, <span class="at">num_bootstrap =</span> <span class="dv">100</span>)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>vi_birds <span class="ot">&lt;-</span> <span class="fu">mrVip</span>(</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  yhats_birds_combined,</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrBootstrap_obj =</span> bs_birds,</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>,</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">global_top_var =</span> <span class="dv">10</span></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
-class imbalance. Substituting NA values with zero.</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance plot</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>vi_birds[[<span class="dv">3</span>]] <span class="sc">+</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Variable Importance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="dummy_files/figure-html/unnamed-chunk-8-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Co-occurrence network</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>assoc_net_birds <span class="ot">&lt;-</span> <span class="fu">mrCoOccurNet</span>(bs_birds)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_network</span>(</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  assoc_net_birds,</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">strength_threash =</span> <span class="fl">0.1</span>,</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">network_title =</span> <span class="st">"Bird Co-occurrence Network"</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in plot_network(assoc_net_birds, strength_threash = 0.1, network_title
-= "Bird Co-occurrence Network"): No effects above the specified threashold of
-0.1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
-</div>
-</div>
-</section>
-<section id="plant-community-analysis" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="plant-community-analysis"><span class="header-section-number">3.5</span> Plant community analysis</h2>
-<div class="cell" data-messages="false">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare Plant data (similar structure to beetles)</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>Y_plants <span class="ot">&lt;-</span> <span class="fu">filterRareCommon</span>(raw_data_plants, <span class="at">lower =</span> <span class="fl">0.2</span>, <span class="at">higher =</span> <span class="fl">0.7</span>)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use same environmental predictors but select relevant variables</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare environmental predictors</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>X_plants <span class="ot">&lt;-</span> raw_predictors <span class="sc">%&gt;%</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_S_Mat_Indval2,</span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetle_S_Total,</span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>dist_regrowth,</span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Age,</span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_Mat_Ratio,</span>
-<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Mat_EFL,</span>
-<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Total,</span>
-<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_Mat_Ratio,</span>
-<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>slope_f_Jayne,</span>
-<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>aspect_f_Jayne,</span>
-<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"Bryo"</span>),</span>
-<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"Plant"</span>),</span>
-<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"Moss"</span>),</span>
-<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Vegetation_cover</span>
-<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">"Jayne"</span>, <span class="st">""</span>, .), <span class="fu">contains</span>(<span class="st">"Jayne"</span>))</span>
-<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables</span></span>
-<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>X_plants<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_plants<span class="sc">$</span>Site)</span>
-<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>X_plants<span class="sc">$</span>geol_ <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_plants<span class="sc">$</span>geol_)</span>
-<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove site for model comparison</span></span>
-<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>X_plants<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>var_sel_plants <span class="ot">&lt;-</span> <span class="fu">select_variables</span>(<span class="at">Y =</span> Y_plants, <span class="at">X =</span> X_plants)</span>
-<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>X_plants <span class="ot">&lt;-</span> var_sel_plants[[<span class="dv">2</span>]]</span>
-<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>X1_plants <span class="ot">&lt;-</span> Y_plants</span>
-<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Train models</span></span>
-<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>yhats_plants_env <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_plants,</span>
-<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_plants,</span>
-<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb47-42"><a href="#cb47-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb47-43"><a href="#cb47-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb47-44"><a href="#cb47-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb47-45"><a href="#cb47-45" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
@@ -799,16 +455,481 @@ class imbalance. Substituting NA values with zero.</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>yhats_plants_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_plants,</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_plants,</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 2: Co-occurrence only</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>yhats_beetles_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_beetles,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_beetles,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 3: Combined</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>yhats_beetles_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_beetles,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_beetles,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_beetles,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting dummy = TRUE because X contains factors.
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+</div>
+</section>
+<section id="beetle-performance-assessment" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="beetle-performance-assessment"><span class="header-section-number">3.3.2</span> Beetle Performance Assessment</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate model performance</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ModelPerf_beetles_env <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_beetles_env)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ModelPerf_beetles_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_beetles_cooccur)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>ModelPerf_beetles_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_beetles_combined)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>perf_comparison_beetles <span class="ot">&lt;-</span> <span class="fu">mrPerformancePlot</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf1 =</span> ModelPerf_beetles_combined,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf2 =</span> ModelPerf_beetles_env,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"classification"</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>perf_comparison_beetles<span class="sc">$</span>performance_plot <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Beetle Community Model Performance"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary table</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>beetle_performance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Environment only"</span>, <span class="st">"Co-occurrence only"</span>, <span class="st">"Combined"</span>),</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCC =</span> <span class="fu">c</span>(</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    ModelPerf_beetles_env[[<span class="dv">2</span>]],</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    ModelPerf_beetles_cooccur[[<span class="dv">2</span>]],</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    ModelPerf_beetles_combined[[<span class="dv">2</span>]]</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>beetle_performance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="beetle-variable-importance-and-associations" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="beetle-variable-importance-and-associations"><span class="header-section-number">3.3.3</span> Beetle Variable Importance and Associations</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap analysis</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>bs_beetles <span class="ot">&lt;-</span> <span class="fu">mrBootstrap</span>(yhats_beetles_combined, <span class="at">num_bootstrap =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>vi_beetles <span class="ot">&lt;-</span> <span class="fu">mrVip</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  yhats_beetles_combined,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrBootstrap_obj =</span> bs_beetles,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">global_top_var =</span> <span class="dv">10</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
+class imbalance. Substituting NA values with zero.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vi_beetles[[<span class="dv">3</span>]] <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Beetle Community Variable Importance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dummy_files/figure-html/unnamed-chunk-2-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Co-occurrence network</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>assoc_net_beetles <span class="ot">&lt;-</span> <span class="fu">mrCoOccurNet</span>(bs_beetles)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_network</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  assoc_net_beetles,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">strength_threash =</span> <span class="fl">0.1</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">network_title =</span> <span class="st">"Beetle Co-occurrence Network"</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in plot_network(assoc_net_beetles, strength_threash = 0.1,
+network_title = "Beetle Co-occurrence Network"): No effects above the specified
+threashold of 0.1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section>
+<section id="beetle-interactions" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="beetle-interactions"><span class="header-section-number">3.3.4</span> Beetle interactions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>interactions_rf <span class="ot">&lt;-</span> yhats_beetles_combined <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mrInteractions</span>(<span class="at">num_bootstrap =</span> <span class="dv">10</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>interactions_rf[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dummy_files/figure-html/unnamed-chunk-4-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bird-community-analysis" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="bird-community-analysis"><span class="header-section-number">3.4</span> Bird community analysis</h2>
+<div class="cell" data-messages="false">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare bird data (similar structure to beetles)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>Y_birds <span class="ot">&lt;-</span> <span class="fu">filterRareCommon</span>(raw_data_birds, <span class="at">lower =</span> <span class="fl">0.2</span>, <span class="at">higher =</span> <span class="fl">0.7</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use same environmental predictors but select relevant variables</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare environmental predictors</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>X_birds <span class="ot">&lt;-</span> raw_predictors <span class="sc">%&gt;%</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_S_Mat_Indval2,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetle_S_Total,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>dist_regrowth,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Age,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_Mat_Ratio,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Mat_EFL,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Total,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_Mat_Ratio,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>slope_f_Jayne,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>aspect_f_Jayne</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>X_birds<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_birds<span class="sc">$</span>Site)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>X_birds<span class="sc">$</span>geol_Jayne <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_birds<span class="sc">$</span>geol_Jayne)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove site for model comparison</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>X_birds<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>var_sel_birds <span class="ot">&lt;-</span> <span class="fu">select_variables</span>(<span class="at">Y =</span> Y_birds, <span class="at">X =</span> X_birds)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>X_birds <span class="ot">&lt;-</span> var_sel_birds[[<span class="dv">2</span>]]</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>X1_birds <span class="ot">&lt;-</span> Y_birds</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Train models</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>yhats_birds_env <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_birds,</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_birds,</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>yhats_birds_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_birds,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_birds,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>yhats_birds_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_birds,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_birds,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_birds,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting dummy = TRUE because X contains factors.
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance assessment</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>ModelPerf_birds_env <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_birds_env)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>ModelPerf_birds_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_birds_cooccur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
+class imbalance. Substituting NA values with zero.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ModelPerf_birds_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_birds_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
+class imbalance. Substituting NA values with zero.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_birds <span class="ot">&lt;-</span> <span class="fu">mrPerformancePlot</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf1 =</span> ModelPerf_birds_combined,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf2 =</span> ModelPerf_birds_env,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"classification"</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot performance</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_birds<span class="sc">$</span>performance_plot <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Model Performance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: label.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dummy_files/figure-html/unnamed-chunk-5-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance summary table</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>bird_performance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Environment only"</span>, <span class="st">"Co-occurrence only"</span>, <span class="st">"Combined"</span>),</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCC =</span> <span class="fu">c</span>(</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    ModelPerf_birds_env[[<span class="dv">2</span>]],</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    ModelPerf_birds_cooccur[[<span class="dv">2</span>]],</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    ModelPerf_birds_combined[[<span class="dv">2</span>]]</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>bird_performance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Model        MCC
+1   Environment only 0.20896812
+2 Co-occurrence only 0.02983434
+3           Combined 0.17430102</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap analysis</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>bs_birds <span class="ot">&lt;-</span> <span class="fu">mrBootstrap</span>(yhats_birds_combined, <span class="at">num_bootstrap =</span> <span class="dv">100</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>vi_birds <span class="ot">&lt;-</span> <span class="fu">mrVip</span>(</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  yhats_birds_combined,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrBootstrap_obj =</span> bs_birds,</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">global_top_var =</span> <span class="dv">10</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
+class imbalance. Substituting NA values with zero.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance plot</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>vi_birds[[<span class="dv">3</span>]] <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Variable Importance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dummy_files/figure-html/unnamed-chunk-8-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Co-occurrence network</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>assoc_net_birds <span class="ot">&lt;-</span> <span class="fu">mrCoOccurNet</span>(bs_birds)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_network</span>(</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  assoc_net_birds,</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">strength_threash =</span> <span class="fl">0.1</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">network_title =</span> <span class="st">"Bird Co-occurrence Network"</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in plot_network(assoc_net_birds, strength_threash = 0.1, network_title
+= "Bird Co-occurrence Network"): No effects above the specified threashold of
+0.1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section>
+<section id="plant-community-analysis" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="plant-community-analysis"><span class="header-section-number">3.5</span> Plant community analysis</h2>
+<div class="cell" data-messages="false">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare Plant data (similar structure to beetles)</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>Y_plants <span class="ot">&lt;-</span> <span class="fu">filterRareCommon</span>(raw_data_plants, <span class="at">lower =</span> <span class="fl">0.2</span>, <span class="at">higher =</span> <span class="fl">0.7</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use same environmental predictors but select relevant variables</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare environmental predictors</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>X_plants <span class="ot">&lt;-</span> raw_predictors <span class="sc">%&gt;%</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_S_Mat_Indval2,</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetle_S_Total,</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>dist_regrowth,</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Age,</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Beetles_Mat_Ratio,</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Mat_EFL,</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_S_Total,</span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Birds_Mat_Ratio,</span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>slope_f_Jayne,</span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>aspect_f_Jayne,</span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"Bryo"</span>),</span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"Plant"</span>),</span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"Moss"</span>),</span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>Vegetation_cover</span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">"Jayne"</span>, <span class="st">""</span>, .), <span class="fu">contains</span>(<span class="st">"Jayne"</span>))</span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables</span></span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a>X_plants<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_plants<span class="sc">$</span>Site)</span>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>X_plants<span class="sc">$</span>geol_ <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(X_plants<span class="sc">$</span>geol_)</span>
+<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-29"><a href="#cb58-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove site for model comparison</span></span>
+<span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a>X_plants<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a>var_sel_plants <span class="ot">&lt;-</span> <span class="fu">select_variables</span>(<span class="at">Y =</span> Y_plants, <span class="at">X =</span> X_plants)</span>
+<span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a>X_plants <span class="ot">&lt;-</span> var_sel_plants[[<span class="dv">2</span>]]</span>
+<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a>X1_plants <span class="ot">&lt;-</span> Y_plants</span>
+<span id="cb58-34"><a href="#cb58-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-35"><a href="#cb58-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Train models</span></span>
+<span id="cb58-36"><a href="#cb58-36" aria-hidden="true" tabindex="-1"></a>yhats_plants_env <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb58-37"><a href="#cb58-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_plants,</span>
+<span id="cb58-38"><a href="#cb58-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_plants,</span>
+<span id="cb58-39"><a href="#cb58-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb58-40"><a href="#cb58-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb58-41"><a href="#cb58-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb58-42"><a href="#cb58-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb58-43"><a href="#cb58-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb58-44"><a href="#cb58-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb58-45"><a href="#cb58-45" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
 </div>
@@ -821,47 +942,147 @@ class imbalance. Substituting NA values with zero.</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>yhats_plants_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_plants,</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_plants,</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_plants,</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Setting dummy = TRUE because X contains factors.</code></pre>
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance assessment</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>ModelPerf_plants_env <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_plants_env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>yhats_plants_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_plants,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_plants,</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>yhats_plants_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLpredicts</span>(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X_plants,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> Y_plants,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">X1 =</span> X1_plants,</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> model_rf,</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_data =</span> <span class="st">'no'</span>,</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tune_grid_size =</span> <span class="dv">5</span>,</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> <span class="fl">0.6</span>,</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>,</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">racing =</span> <span class="cn">TRUE</span></span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting dummy = TRUE because X contains factors.
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: No control observations were detected in `truth` with control level '1'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"
+i Creating pre-processing data to finalize 1 unknown parameter: "mtry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance assessment</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>ModelPerf_plants_env <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_plants_env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
 class imbalance. Substituting NA values with zero.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>ModelPerf_plants_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_plants_cooccur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>ModelPerf_plants_cooccur <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_plants_cooccur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
 class imbalance. Substituting NA values with zero.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>ModelPerf_plants_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_plants_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>ModelPerf_plants_combined <span class="ot">&lt;-</span> <span class="fu">mrIMLperformance</span>(yhats_plants_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
 class imbalance. Substituting NA values with zero.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_plants <span class="ot">&lt;-</span> <span class="fu">mrPerformancePlot</span>(</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf1 =</span> ModelPerf_plants_combined,</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf2 =</span> ModelPerf_plants_env,</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"classification"</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_plants <span class="ot">&lt;-</span> <span class="fu">mrPerformancePlot</span>(</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf1 =</span> ModelPerf_plants_combined,</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ModelPerf2 =</span> ModelPerf_plants_env,</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"classification"</span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot performance</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_plants<span class="sc">$</span>performance_plot <span class="sc">+</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Model Performance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot performance</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>perf_comparison_plants<span class="sc">$</span>performance_plot <span class="sc">+</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Model Performance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: label.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -871,46 +1092,46 @@ class imbalance. Substituting NA values with zero.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance summary table</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>plant_performance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Environment only"</span>, <span class="st">"Co-occurrence only"</span>, <span class="st">"Combined"</span>),</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCC =</span> <span class="fu">c</span>(</span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>    ModelPerf_plants_env[[<span class="dv">2</span>]],</span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    ModelPerf_plants_cooccur[[<span class="dv">2</span>]],</span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    ModelPerf_plants_combined[[<span class="dv">2</span>]]</span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>plant_performance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance summary table</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>plant_performance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Environment only"</span>, <span class="st">"Co-occurrence only"</span>, <span class="st">"Combined"</span>),</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCC =</span> <span class="fu">c</span>(</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>    ModelPerf_plants_env[[<span class="dv">2</span>]],</span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>    ModelPerf_plants_cooccur[[<span class="dv">2</span>]],</span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>    ModelPerf_plants_combined[[<span class="dv">2</span>]]</span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>plant_performance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Model       MCC
-1   Environment only 0.4011448
-2 Co-occurrence only 0.3982088
-3           Combined 0.4252313</code></pre>
+1   Environment only 0.4644385
+2 Co-occurrence only 0.3957885
+3           Combined 0.4860622</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap analysis</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>bs_plants <span class="ot">&lt;-</span> <span class="fu">mrBootstrap</span>(</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  yhats_plants_combined,</span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_bootstrap =</span> <span class="dv">100</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>vi_plants <span class="ot">&lt;-</span> <span class="fu">mrVip</span>(</span>
-<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  yhats_plants_combined,</span>
-<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrBootstrap_obj =</span> bs_plants,</span>
-<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>,</span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">global_top_var =</span> <span class="dv">10</span></span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap analysis</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>bs_plants <span class="ot">&lt;-</span> <span class="fu">mrBootstrap</span>(</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  yhats_plants_combined,</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_bootstrap =</span> <span class="dv">100</span></span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>vi_plants <span class="ot">&lt;-</span> <span class="fu">mrVip</span>(</span>
+<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>  yhats_plants_combined,</span>
+<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrBootstrap_obj =</span> bs_plants,</span>
+<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">0.5</span>,</span>
+<span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">global_top_var =</span> <span class="dv">10</span></span>
+<span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: NAs produced when calculating MCC. This is common when there is a
 class imbalance. Substituting NA values with zero.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance plot</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>vi_plants[[<span class="dv">3</span>]] <span class="sc">+</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Variable Importance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance plot</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>vi_plants[[<span class="dv">3</span>]] <span class="sc">+</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bird Community Variable Importance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -920,14 +1141,14 @@ class imbalance. Substituting NA values with zero.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Co-occurrence network</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>assoc_net_plants <span class="ot">&lt;-</span> <span class="fu">mrCoOccurNet</span>(bs_plants)</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_network</span>(</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  assoc_net_plants,</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">strength_threash =</span> <span class="fl">0.1</span>,</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">network_title =</span> <span class="st">"Plant Co-occurrence Network"</span>,</span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nmds_layout =</span> <span class="cn">TRUE</span></span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Co-occurrence network</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>assoc_net_plants <span class="ot">&lt;-</span> <span class="fu">mrCoOccurNet</span>(bs_plants)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_network</span>(</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>  assoc_net_plants,</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">strength_threash =</span> <span class="fl">0.1</span>,</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">network_title =</span> <span class="st">"Plant Co-occurrence Network"</span>,</span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nmds_layout =</span> <span class="cn">TRUE</span></span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

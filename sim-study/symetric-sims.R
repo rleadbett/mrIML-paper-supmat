@@ -11,9 +11,10 @@ generateM_specific_type <- function(
   type.network = "random",
   type.interact = "random",
   interact.str.max = 0.5,
-  mix.compt.ratio = 0.5
+  mix.compt.ratio = 0.5,
+  self_reg = 1
 ) {
-  #  @param nn number of nodes
+  # @param nn number of nodes
   # @param k_ave average degree (number of edges per node)
   # @param type.network network structure
   #               random: random networks
@@ -130,7 +131,7 @@ generateM_specific_type <- function(
   }
 
   # diagonal elements
-  diag(A) <- -1
+  diag(A) <- -self_reg
 
   return(list(mtx_g, A))
 }

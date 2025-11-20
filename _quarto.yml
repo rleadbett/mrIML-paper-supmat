@@ -17,6 +17,8 @@ book:
         - case-studies/02-forest-communities/dummy.qmd
         - case-studies/03-ostrich-microbiome/dummy.qmd
     - part: "Simulation study"
+      chapters:
+        - sim-study/dummy.qmd
     - references.qmd
 
 bibliography: references.bib

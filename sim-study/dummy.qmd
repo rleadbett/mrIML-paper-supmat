@@ -32,14 +32,17 @@ source(here("R-functions", "plot_network.r"))
 set.seed(109)
 
 # Set up parallel processing
-n_cores <- parallel::detectCores()
-plan("multicore", workers = n_cores - 2)
+#n_cores <- parallel::detectCores()
+#plan("multisession", workers = n_cores - 2)
+plan("sequential")
 
 # Load simulated data
 source(
   here("sim-study", "symetric-sims.r")
 )
 ```
+
+Generate a co-ocurance matrix, M.
 
 ```{r}
 network_size <- 20
@@ -49,7 +52,7 @@ simulated_network <- generateM_specific_type(
   nn = network_size,
   k_ave = k_average,
   type.network = "random",
-  type.interact = "mix",
+  type.interact = "random",
   interact.str.max = 0.4,
   mix.compt.ratio = 0.5
 )
@@ -57,17 +60,22 @@ true_network <- simulated_network[[1]]
 M <- simulated_network[[2]]
 ```
 
+plot population dynamics
+
 ```{r}
-## plot population dynamics
-y <- rpois(network_size, lambda = 100) #initial abundance
-r <- runif(network_size) #growth rates
+# initial abundance
+y <- rpois(network_size, lambda = 100)
+# growth rates
+r <- runif(network_size)
 res <- glv(network_size, M, r, y)
 tsplot(10 * res[, 20:1000], time.given = T)
 ```
 
+Generate dataset on species abundance using the GLV model and convert to presence-absence data.
+
 ```{r}
 data <- generateDataSet(
-  1000,
+  900,
   M,
   count = network_size * 10000,
   mode = 4
@@ -79,12 +87,13 @@ data <- generateDataSet(
   )
 ```
 
-```{r}
-Y <- filterRareCommon(data, lower = 0.01, higher = 0.99)
-X1 <- Y
-```
+Prepare data and fit mrIML model.
 
 ```{r}
+#| results: 'hide'
+Y <- filterRareCommon(data, lower = 0.01, higher = 0.99)
+X1 <- Y
+
 model_rf <- rand_forest(
   trees = 100,
   mode = "classification",
@@ -92,9 +101,7 @@ model_rf <- rand_forest(
   min_n = tune()
 ) %>%
   set_engine("randomForest")
-```
 
-```{r}
 yhats_rf_sim <- mrIMLpredicts(
   Y = Y,
   X = NULL,
@@ -106,13 +113,20 @@ yhats_rf_sim <- mrIMLpredicts(
 )
 ```
 
+Perform bootstrapping.
+
 ```{r}
+#| results: 'hide'
 bs_sim <- mrBootstrap(yhats_rf_sim)
 ```
+
+Extract co-occurance network.
 
 ```{r}
 assoc_net <- mrCoOccurNet(bs_sim)
 ```
+
+Plot the network alongside the truth.
 
 ```{r}
 mrIML_mat <- assoc_net %>%
@@ -134,7 +148,7 @@ mrIML_mat <- assoc_net %>%
 #plots
 g_mrIML <- graph_from_adjacency_matrix(
   mrIML_mat,
-  mode = 'undirected',
+  mode = "max", #'undirected',
   weighted = T,
   diag = F
 )
@@ -155,7 +169,7 @@ g_true <- graph_from_adjacency_matrix(
 edge_colors_true <- ifelse(E(g_true)$weight < 0, yes = "red", no = "blue")
 edge_widths_true <- abs(E(g_true)$weight) * 5 # Adjust the scaling factor as needed
 
-layout1 <- layout_nicely(g_true)
+layout1 <- layout_nicely(g_true) # This produces a warning but not a big deal
 
 par_old <- par(mfrow = c(1, 2))
 
@@ -180,17 +194,425 @@ plot(
 par(par_old)
 ```
 
+Compare the learned networks with the truth.
+
 ```{r}
-dist_mat_true <- 1 - true_mat #something is wronghere
+dist_mat_true <- 1 - true_mat
 dist_mat_mrIML <- 1 - mrIML_mat
-mantel_result <- vegan::mantel(dist_mat_true, dist_mat_mrIML, method = "pearson")
+mantel_result <- vegan::mantel(
+  as.dist(dist_mat_true),
+  as.dist(dist_mat_mrIML),
+  method = "pearson"
+)
 mantel_result
 ```
 
 ## Mutualistic
 
+```{r}
+simulated_mutual_network <- generateM_specific_type(
+  nn = network_size,
+  k_ave = k_average,
+  type.network = "random",
+  type.interact = "mutual",
+  interact.str.max = 0.3,
+  mix.compt.ratio = 0.5
+)
+true_mutual_network <- simulated_mutual_network[[1]]
+M_mutual <- simulated_mutual_network[[2]]
+```
+
+```{r}
+data_mutual <- generateDataSet(
+  900,
+  M_mutual,
+  count = network_size * 10000,
+  mode = 4
+) %>%
+  t() %>%
+  as.data.frame() %>%
+  mutate(
+    across(everything(), ~ ifelse(. < 1, yes = 0, no = 1))
+  )
+```
+
+```{r}
+#| results: 'hide'
+# Prepare data
+Y_mutual <- filterRareCommon(data_mutual, lower = 0.01, higher = 0.99)
+X1_mutual <- Y_mutual
+# Fit mrIML obj
+yhats_rf_sim_mutual <- mrIMLpredicts(
+  Y = Y_mutual,
+  X = NULL,
+  X1 = X1_mutual,
+  Model = model_rf,
+  prop = 0.7,
+  k = 5,
+  racing = FALSE
+)
+# Bootstrapping
+bs_sim_mutual <- mrBootstrap(yhats_rf_sim_mutual)
+# Extract network
+assoc_net_mutual <- mrCoOccurNet(bs_sim_mutual)
+```
+
+```{r}
+mrIML_mat_mutual <- assoc_net_mutual %>%
+  filter(mean_strength > 0.1) %>%
+  mutate(
+    mean_strength_dir = ifelse(
+      direction == "negative",
+      yes = -mean_strength,
+      no = mean_strength
+    ),
+    across(contains("taxa"), ~ sub("^sp", "", .))
+  ) %>%
+  graph_from_data_frame(
+    directed = FALSE,
+    vertices = sub("^sp", "", names(Y_mutual))
+  ) %>%
+  get.adjacency(attr = "mean_strength_dir", sparse = FALSE)
+
+#plots
+g_mrIML_mutual <- graph_from_adjacency_matrix(
+  mrIML_mat_mutual,
+  mode = 'undirected',
+  weighted = T,
+  diag = F
+)
+
+edge_colors_mrIML_mutual <- ifelse(
+  E(g_mrIML_mutual)$weight < 0,
+  yes = "red",
+  no = "blue"
+)
+edge_widths_mrIML_mutual <- abs(E(g_mrIML_mutual)$weight) * 10 # Adjust the scaling factor as needed
+matching_indices_mutual <- as.numeric(rownames(mrIML_mat_mutual))
+
+true_mat_mutual <- M_mutual[matching_indices_mutual, matching_indices_mutual]
+rownames(true_mat_mutual) <- rownames(mrIML_mat_mutual)
+colnames(true_mat_mutual) <- rownames(mrIML_mat_mutual)
+g_true_mutual <- graph_from_adjacency_matrix(
+  true_mat_mutual,
+  mode = 'undirected',
+  weighted = T,
+  diag = F
+)
+edge_colors_true_mutual <- ifelse(
+  E(g_true_mutual)$weight < 0,
+  yes = "red",
+  no = "blue"
+)
+edge_widths_true_mutual <- abs(E(g_true_mutual)$weight) * 5 # Adjust the scaling factor as needed
+
+layout1_mutual <- layout_nicely(g_true_mutual)
+
+par_old <- par(mfrow = c(1, 2))
+
+plot(
+  g_mrIML_mutual,
+  layout = layout1_mutual,
+  edge.color = edge_colors_mrIML_mutual,
+  edge.width = edge_widths_mrIML_mutual,
+  isolates = TRUE,
+  main = "mrIML co-occurence"
+)
+
+plot(
+  g_true_mutual,
+  layout = layout1_mutual,
+  edge.color = edge_colors_true_mutual,
+  isolates = TRUE,
+  edge.width = edge_widths_true_mutual,
+  main = "simulated co-occurence"
+)
+
+par(par_old)
+```
+
+```{r}
+dist_mat_true_mutual <- 1 - true_mat_mutual
+dist_mat_mrIML_mutual <- 1 - mrIML_mat_mutual
+mantel_result <- vegan::mantel(
+  as.dist(dist_mat_true_mutual),
+  as.dist(dist_mat_mrIML_mutual),
+  method = "pearson"
+)
+mantel_result
+```
+
 ## Competitive
+
+```{r}
+simulated_compt_network <- generateM_specific_type(
+  nn = network_size,
+  k_ave = k_average,
+  type.network = "random",
+  type.interact = "compt",
+  interact.str.max = 0.5,
+  mix.compt.ratio = 0.5
+)
+true_compt_network <- simulated_compt_network[[1]]
+M_compt <- simulated_compt_network[[2]]
+diag(M_compt) <- -0.5 # Reduce the level of self regulation
+```
+
+```{r}
+data_compt <- generateDataSet(
+  900,
+  M_compt,
+  count = network_size * 10000,
+  mode = 4
+) %>%
+  t() %>%
+  as.data.frame() %>%
+  mutate(
+    across(everything(), ~ ifelse(. < 1, yes = 0, no = 1))
+  )
+```
+
+```{r}
+#| results: 'hide'
+# Prepare data
+Y_compt <- filterRareCommon(data_compt, lower = 0.01, higher = 0.99)
+X1_compt <- Y_compt
+# Fit mrIML obj
+yhats_rf_sim_compt <- mrIMLpredicts(
+  Y = Y_compt,
+  X = NULL,
+  X1 = X1_compt,
+  Model = model_rf,
+  prop = 0.7,
+  k = 5,
+  racing = FALSE
+)
+# Bootstrapping
+bs_sim_compt <- mrBootstrap(yhats_rf_sim_compt)
+# Extract network
+assoc_net_compt <- mrCoOccurNet(bs_sim_compt)
+```
+
+```{r}
+mrIML_mat_compt <- assoc_net_compt %>%
+  filter(mean_strength > 0.1) %>%
+  mutate(
+    mean_strength_dir = ifelse(
+      direction == "negative",
+      yes = -mean_strength,
+      no = mean_strength
+    ),
+    across(contains("taxa"), ~ sub("^sp", "", .))
+  ) %>%
+  graph_from_data_frame(
+    directed = FALSE,
+    vertices = sub("^sp", "", names(Y_compt))
+  ) %>%
+  get.adjacency(attr = "mean_strength_dir", sparse = FALSE)
+
+#plots
+g_mrIML_compt <- graph_from_adjacency_matrix(
+  mrIML_mat_compt,
+  mode = 'undirected',
+  weighted = T,
+  diag = F
+)
+
+edge_colors_mrIML_compt <- ifelse(
+  E(g_mrIML_compt)$weight < 0,
+  yes = "red",
+  no = "blue"
+)
+edge_widths_mrIML_compt <- abs(E(g_mrIML_compt)$weight) * 10 # Adjust the scaling factor as needed
+matching_indices_compt <- as.numeric(rownames(mrIML_mat_compt))
+
+true_mat_compt <- M_compt[matching_indices_compt, matching_indices_compt]
+rownames(true_mat_compt) <- rownames(mrIML_mat_compt)
+colnames(true_mat_compt) <- rownames(mrIML_mat_compt)
+g_true_compt <- graph_from_adjacency_matrix(
+  true_mat_compt,
+  mode = 'undirected',
+  weighted = T,
+  diag = F
+)
+edge_colors_true_compt <- ifelse(
+  E(g_true_compt)$weight < 0,
+  yes = "red",
+  no = "blue"
+)
+edge_widths_true_compt <- abs(E(g_true_compt)$weight) * 5 # Adjust the scaling factor as needed
+
+layout1_compt <- layout_nicely(g_true_compt)
+
+par_old <- par(mfrow = c(1, 2))
+
+plot(
+  g_mrIML_compt,
+  layout = layout1_compt,
+  edge.color = edge_colors_mrIML_compt,
+  edge.width = edge_widths_mrIML_compt,
+  isolates = TRUE,
+  main = "mrIML co-occurence"
+)
+
+plot(
+  g_true_compt,
+  layout = layout1_compt,
+  edge.color = edge_colors_true_compt,
+  isolates = TRUE,
+  edge.width = edge_widths_true_compt,
+  main = "simulated co-occurence"
+)
+
+par(par_old)
+```
+
+```{r}
+dist_mat_true_compt <- 1 - true_mat_compt
+dist_mat_mrIML_compt <- 1 - mrIML_mat_compt
+mantel_result <- vegan::mantel(
+  as.dist(dist_mat_true_compt),
+  as.dist(dist_mat_mrIML_compt),
+  method = "pearson"
+)
+mantel_result
+```
 
 ## Mixed
 
+```{r}
+simulated_mix_network <- generateM_specific_type(
+  nn = network_size,
+  k_ave = k_average,
+  type.network = "random",
+  type.interact = "mix",
+  interact.str.max = 0.4,
+  mix.compt.ratio = 0.5
+)
+true_mix_network <- simulated_mix_network[[1]]
+M_mix <- simulated_mix_network[[2]]
+```
+
+```{r}
+data_mix <- generateDataSet(
+  900,
+  M_mix,
+  count = network_size * 10000,
+  mode = 4
+) %>%
+  t() %>%
+  as.data.frame() %>%
+  mutate(
+    across(everything(), ~ ifelse(. < 1, yes = 0, no = 1))
+  )
+```
+
+```{r}
+#| results: 'hide'
+# Prepare data
+Y_mix <- filterRareCommon(data_mix, lower = 0.01, higher = 0.99)
+X1_mix <- Y_mix
+# Fit mrIML obj
+yhats_rf_sim_mix <- mrIMLpredicts(
+  Y = Y_mix,
+  X = NULL,
+  X1 = X1_mix,
+  Model = model_rf,
+  prop = 0.7,
+  k = 5,
+  racing = FALSE
+)
+# Bootstrapping
+bs_sim_mix <- mrBootstrap(yhats_rf_sim_mix)
+# Extract network
+assoc_net_mix <- mrCoOccurNet(bs_sim_mix)
+```
+
+```{r}
+mrIML_mat_mix <- assoc_net_mix %>%
+  filter(mean_strength > 0.1) %>%
+  mutate(
+    mean_strength_dir = ifelse(
+      direction == "negative",
+      yes = -mean_strength,
+      no = mean_strength
+    ),
+    across(contains("taxa"), ~ sub("^sp", "", .))
+  ) %>%
+  graph_from_data_frame(
+    directed = FALSE,
+    vertices = sub("^sp", "", names(Y_mix))
+  ) %>%
+  get.adjacency(attr = "mean_strength_dir", sparse = FALSE)
+
+#plots
+g_mrIML_mix <- graph_from_adjacency_matrix(
+  mrIML_mat_mix,
+  mode = 'undirected',
+  weighted = T,
+  diag = F
+)
+
+edge_colors_mrIML_mix <- ifelse(
+  E(g_mrIML_mix)$weight < 0,
+  yes = "red",
+  no = "blue"
+)
+edge_widths_mrIML_mix <- abs(E(g_mrIML_mix)$weight) * 10 # Adjust the scaling factor as needed
+matching_indices_mix <- as.numeric(rownames(mrIML_mat_mix))
+
+true_mat_mix <- M_mix[matching_indices_mix, matching_indices_mix]
+rownames(true_mat_mix) <- rownames(mrIML_mat_mix)
+colnames(true_mat_mix) <- rownames(mrIML_mat_mix)
+g_true_mix <- graph_from_adjacency_matrix(
+  true_mat_mix,
+  mode = 'undirected',
+  weighted = T,
+  diag = F
+)
+edge_colors_true_mix <- ifelse(
+  E(g_true_mix)$weight < 0,
+  yes = "red",
+  no = "blue"
+)
+edge_widths_true_mix <- abs(E(g_true_mix)$weight) * 5 # Adjust the scaling factor as needed
+
+layout1_mix <- layout_nicely(g_true_mix)
+
+par_old <- par(mfrow = c(1, 2))
+
+plot(
+  g_mrIML_mix,
+  layout = layout1_mix,
+  edge.color = edge_colors_mrIML_mix,
+  edge.width = edge_widths_mrIML_mix,
+  isolates = TRUE,
+  main = "mrIML co-occurence"
+)
+
+plot(
+  g_true_mix,
+  layout = layout1_mix,
+  edge.color = edge_colors_true_mix,
+  isolates = TRUE,
+  edge.width = edge_widths_true_mix,
+  main = "simulated co-occurence"
+)
+
+par(par_old)
+```
+
+```{r}
+dist_mat_true_mix <- 1 - true_mat_mix
+dist_mat_mrIML_mix <- 1 - mrIML_mat_mix
+mantel_result <- vegan::mantel(
+  as.dist(dist_mat_true_mix),
+  as.dist(dist_mat_mrIML_mix),
+  method = "pearson"
+)
+mantel_result
+```
+
 # Asymetric simulations
+
+...

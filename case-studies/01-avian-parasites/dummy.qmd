@@ -260,16 +260,22 @@ shap_results <- mrShapely(
   taxa = "Plas",
   plot_feature_effects = TRUE,
   plot_dependencies = TRUE,
-  plot_2D_dependencies = FALSE
+  plot_2D_dependencies = TRUE
 )
 ```
 
 ```{r}
-# Display SHAP results
-p <- (shap_results$feature_effects$Plas[[1]] + theme_minimal()) +
-  (shap_results$feature_effects$Plas[[1]] + theme_minimal()) +
-  plot_annotation("Plas") +
-  plot_layout(guides = "collect", axis_titles = "collect")
+p <- (shap_results$dependencies2D$Plas[[2]][[2]] +
+  scale_colour_viridis_c(limits = c(-0.4, 0.8), option = "B") +
+  theme_minimal() +
+  labs(title = "b)")) +
+  (shap_results$dependencies2D$Plas[[1]][[2]] +
+    scale_colour_viridis_c(limits = c(-0.4, 0.8), option = "B") +
+    theme_minimal() +
+    labs(title = "c)")) +
+  patchwork::plot_layout(ncol = 2, guides = "collect")
+
+p
 ```
 
 ## Co-occurrence Network Construction
