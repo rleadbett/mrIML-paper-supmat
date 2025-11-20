@@ -8,7 +8,7 @@
 # Quarto
 /.quarto/
 _site/
-docs/
+
 
 # Data (if sensitive)
 **/data/raw/*
