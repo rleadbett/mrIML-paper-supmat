@@ -23,6 +23,7 @@ library(cowplot)
 library(patchwork)
 
 library(seqtime)
+library(Hmsc)
 
 # Load custom functions
 source(here("R-functions", "select_variables.r"))
@@ -109,7 +110,7 @@ yhats_rf_sim <- mrIMLpredicts(
   Model = model_rf,
   prop = 0.7,
   k = 5,
-  racing = TRUE
+  racing = FALSE
 )
 ```
 
@@ -148,9 +149,9 @@ mrIML_mat <- assoc_net %>%
 #plots
 g_mrIML <- graph_from_adjacency_matrix(
   mrIML_mat,
-  mode = "max", #'undirected',
+  mode     = "undirected",
   weighted = T,
-  diag = F
+  diag     = F
 )
 
 edge_colors_mrIML <- ifelse(E(g_mrIML)$weight < 0, yes = "red", no = "blue")
@@ -170,8 +171,67 @@ edge_colors_true <- ifelse(E(g_true)$weight < 0, yes = "red", no = "blue")
 edge_widths_true <- abs(E(g_true)$weight) * 5 # Adjust the scaling factor as needed
 
 layout1 <- layout_nicely(g_true) # This produces a warning but not a big deal
+```
 
-par_old <- par(mfrow = c(1, 2))
+Fit HMSC model and extract residual species associations.
+
+```{r}
+#| results: 'hide'
+studyDesign <- data.frame(sample = factor(1:nrow(Y)))
+rL <- HmscRandomLevel(units = studyDesign$sample)
+m_hmsc <- Hmsc(
+  Y           = as.matrix(Y),
+  XFormula    = ~1,
+  XData       = data.frame(intercept = rep(1, nrow(Y))),
+  distr       = "probit",
+  studyDesign = studyDesign,
+  ranLevels   = list("sample" = rL)
+)
+m_hmsc <- sampleMcmc(
+  m_hmsc,
+  thin      = 50,
+  samples   = 1000,
+  transient = 5000,
+  nChains   = 4,
+  verbose   = 0
+)
+```
+
+```{r}
+mpost <- convertToCodaObject(m_hmsc)
+psrf <- gelman.diag(mpost$Omega[[1]], multivariate = FALSE)$psrf
+psrf
+```
+
+```{r}
+#| results: 'asis'
+if (any(psrf[, "Point est."] > 1.1)) {
+  cat("::: {.callout-warning}\n")
+  cat("**HMSC convergence concern:** One or more Omega parameters have Rhat > 1.1,")
+  cat(" indicating incomplete chain mixing. Interpret these results cautiously.\n")
+  cat(":::\n")
+}
+```
+
+```{r}
+assoc <- computeAssociations(m_hmsc)[[1]]
+OmegaCor <- assoc$mean
+OmegaCor[assoc$support > 0.05 & assoc$support < 0.95] <- 0
+hmsc_species_names <- paste0("sp", rownames(mrIML_mat))
+hmsc_mat <- OmegaCor[hmsc_species_names, hmsc_species_names]
+rownames(hmsc_mat) <- rownames(mrIML_mat)
+colnames(hmsc_mat) <- rownames(mrIML_mat)
+
+g_hmsc <- graph_from_adjacency_matrix(
+  hmsc_mat,
+  mode     = "undirected",
+  weighted = TRUE,
+  diag     = FALSE
+)
+edge_colors_hmsc <- ifelse(E(g_hmsc)$weight < 0, yes = "red", no = "blue")
+edge_widths_hmsc <- abs(E(g_hmsc)$weight) * 10
+
+par_old <- par(mfrow = c(1, 3))
 
 plot(
   g_mrIML,
@@ -179,7 +239,16 @@ plot(
   edge.color = edge_colors_mrIML,
   edge.width = edge_widths_mrIML,
   isolates = TRUE,
-  main = "mrIML co-occurence"
+  main = "mrIML co-occurrence"
+)
+
+plot(
+  g_hmsc,
+  layout = layout1,
+  edge.color = edge_colors_hmsc,
+  edge.width = edge_widths_hmsc,
+  isolates = TRUE,
+  main = "HMSC co-occurrence"
 )
 
 plot(
@@ -188,7 +257,7 @@ plot(
   edge.color = edge_colors_true,
   isolates = TRUE,
   edge.width = edge_widths_true,
-  main = "simulated co-occurence"
+  main = "Simulated (truth)"
 )
 
 par(par_old)
@@ -199,12 +268,20 @@ Compare the learned networks with the truth.
 ```{r}
 dist_mat_true <- 1 - true_mat
 dist_mat_mrIML <- 1 - mrIML_mat
-mantel_result <- vegan::mantel(
+mantel_mrIML <- vegan::mantel(
   as.dist(dist_mat_true),
   as.dist(dist_mat_mrIML),
-  method = "pearson"
+  method = "spearman"
 )
-mantel_result
+mantel_mrIML
+
+dist_mat_hmsc <- 1 - hmsc_mat
+mantel_hmsc <- vegan::mantel(
+  as.dist(dist_mat_true),
+  as.dist(dist_mat_hmsc),
+  method = "spearman"
+)
+mantel_hmsc
 ```
 
 ## Mutualistic
@@ -307,8 +384,65 @@ edge_colors_true_mutual <- ifelse(
 edge_widths_true_mutual <- abs(E(g_true_mutual)$weight) * 5 # Adjust the scaling factor as needed
 
 layout1_mutual <- layout_nicely(g_true_mutual)
+```
 
-par_old <- par(mfrow = c(1, 2))
+```{r}
+#| results: 'hide'
+studyDesign_mutual <- data.frame(sample = factor(1:nrow(Y_mutual)))
+rL_mutual <- HmscRandomLevel(units = studyDesign_mutual$sample)
+m_hmsc_mutual <- Hmsc(
+  Y           = as.matrix(Y_mutual),
+  XFormula    = ~1,
+  XData       = data.frame(intercept = rep(1, nrow(Y_mutual))),
+  distr       = "probit",
+  studyDesign = studyDesign_mutual,
+  ranLevels   = list("sample" = rL_mutual)
+)
+m_hmsc_mutual <- sampleMcmc(
+  m_hmsc_mutual,
+  thin      = 50,
+  samples   = 1000,
+  transient = 5000,
+  nChains   = 4,
+  verbose   = 0
+)
+```
+
+```{r}
+mpost_mutual <- convertToCodaObject(m_hmsc_mutual)
+psrf_mutual <- gelman.diag(mpost_mutual$Omega[[1]], multivariate = FALSE)$psrf
+psrf_mutual
+```
+
+```{r}
+#| results: 'asis'
+if (any(psrf_mutual[, "Point est."] > 1.1)) {
+  cat("::: {.callout-warning}\n")
+  cat("**HMSC convergence concern:** One or more Omega parameters have Rhat > 1.1,")
+  cat(" indicating incomplete chain mixing. Interpret these results cautiously.\n")
+  cat(":::\n")
+}
+```
+
+```{r}
+assoc_mutual <- computeAssociations(m_hmsc_mutual)[[1]]
+OmegaCor_mutual <- assoc_mutual$mean
+OmegaCor_mutual[assoc_mutual$support > 0.05 & assoc_mutual$support < 0.95] <- 0
+hmsc_species_names_mutual <- paste0("sp", rownames(mrIML_mat_mutual))
+hmsc_mat_mutual <- OmegaCor_mutual[hmsc_species_names_mutual, hmsc_species_names_mutual]
+rownames(hmsc_mat_mutual) <- rownames(mrIML_mat_mutual)
+colnames(hmsc_mat_mutual) <- rownames(mrIML_mat_mutual)
+
+g_hmsc_mutual <- graph_from_adjacency_matrix(
+  hmsc_mat_mutual,
+  mode     = "undirected",
+  weighted = TRUE,
+  diag     = FALSE
+)
+edge_colors_hmsc_mutual <- ifelse(E(g_hmsc_mutual)$weight < 0, yes = "red", no = "blue")
+edge_widths_hmsc_mutual <- abs(E(g_hmsc_mutual)$weight) * 10
+
+par_old <- par(mfrow = c(1, 3))
 
 plot(
   g_mrIML_mutual,
@@ -316,7 +450,16 @@ plot(
   edge.color = edge_colors_mrIML_mutual,
   edge.width = edge_widths_mrIML_mutual,
   isolates = TRUE,
-  main = "mrIML co-occurence"
+  main = "mrIML co-occurrence"
+)
+
+plot(
+  g_hmsc_mutual,
+  layout = layout1_mutual,
+  edge.color = edge_colors_hmsc_mutual,
+  edge.width = edge_widths_hmsc_mutual,
+  isolates = TRUE,
+  main = "HMSC co-occurrence"
 )
 
 plot(
@@ -325,7 +468,7 @@ plot(
   edge.color = edge_colors_true_mutual,
   isolates = TRUE,
   edge.width = edge_widths_true_mutual,
-  main = "simulated co-occurence"
+  main = "Simulated (truth)"
 )
 
 par(par_old)
@@ -334,12 +477,20 @@ par(par_old)
 ```{r}
 dist_mat_true_mutual <- 1 - true_mat_mutual
 dist_mat_mrIML_mutual <- 1 - mrIML_mat_mutual
-mantel_result <- vegan::mantel(
+mantel_mrIML_mutual <- vegan::mantel(
   as.dist(dist_mat_true_mutual),
   as.dist(dist_mat_mrIML_mutual),
-  method = "pearson"
+  method = "spearman"
 )
-mantel_result
+mantel_mrIML_mutual
+
+dist_mat_hmsc_mutual <- 1 - hmsc_mat_mutual
+mantel_hmsc_mutual <- vegan::mantel(
+  as.dist(dist_mat_true_mutual),
+  as.dist(dist_mat_hmsc_mutual),
+  method = "spearman"
+)
+mantel_hmsc_mutual
 ```
 
 ## Competitive
@@ -443,8 +594,65 @@ edge_colors_true_compt <- ifelse(
 edge_widths_true_compt <- abs(E(g_true_compt)$weight) * 5 # Adjust the scaling factor as needed
 
 layout1_compt <- layout_nicely(g_true_compt)
+```
 
-par_old <- par(mfrow = c(1, 2))
+```{r}
+#| results: 'hide'
+studyDesign_compt <- data.frame(sample = factor(1:nrow(Y_compt)))
+rL_compt <- HmscRandomLevel(units = studyDesign_compt$sample)
+m_hmsc_compt <- Hmsc(
+  Y           = as.matrix(Y_compt),
+  XFormula    = ~1,
+  XData       = data.frame(intercept = rep(1, nrow(Y_compt))),
+  distr       = "probit",
+  studyDesign = studyDesign_compt,
+  ranLevels   = list("sample" = rL_compt)
+)
+m_hmsc_compt <- sampleMcmc(
+  m_hmsc_compt,
+  thin      = 50,
+  samples   = 1000,
+  transient = 5000,
+  nChains   = 4,
+  verbose   = 0
+)
+```
+
+```{r}
+mpost_compt <- convertToCodaObject(m_hmsc_compt)
+psrf_compt <- gelman.diag(mpost_compt$Omega[[1]], multivariate = FALSE)$psrf
+psrf_compt
+```
+
+```{r}
+#| results: 'asis'
+if (any(psrf_compt[, "Point est."] > 1.1)) {
+  cat("::: {.callout-warning}\n")
+  cat("**HMSC convergence concern:** One or more Omega parameters have Rhat > 1.1,")
+  cat(" indicating incomplete chain mixing. Interpret these results cautiously.\n")
+  cat(":::\n")
+}
+```
+
+```{r}
+assoc_compt <- computeAssociations(m_hmsc_compt)[[1]]
+OmegaCor_compt <- assoc_compt$mean
+OmegaCor_compt[assoc_compt$support > 0.05 & assoc_compt$support < 0.95] <- 0
+hmsc_species_names_compt <- paste0("sp", rownames(mrIML_mat_compt))
+hmsc_mat_compt <- OmegaCor_compt[hmsc_species_names_compt, hmsc_species_names_compt]
+rownames(hmsc_mat_compt) <- rownames(mrIML_mat_compt)
+colnames(hmsc_mat_compt) <- rownames(mrIML_mat_compt)
+
+g_hmsc_compt <- graph_from_adjacency_matrix(
+  hmsc_mat_compt,
+  mode     = "undirected",
+  weighted = TRUE,
+  diag     = FALSE
+)
+edge_colors_hmsc_compt <- ifelse(E(g_hmsc_compt)$weight < 0, yes = "red", no = "blue")
+edge_widths_hmsc_compt <- abs(E(g_hmsc_compt)$weight) * 10
+
+par_old <- par(mfrow = c(1, 3))
 
 plot(
   g_mrIML_compt,
@@ -452,7 +660,16 @@ plot(
   edge.color = edge_colors_mrIML_compt,
   edge.width = edge_widths_mrIML_compt,
   isolates = TRUE,
-  main = "mrIML co-occurence"
+  main = "mrIML co-occurrence"
+)
+
+plot(
+  g_hmsc_compt,
+  layout = layout1_compt,
+  edge.color = edge_colors_hmsc_compt,
+  edge.width = edge_widths_hmsc_compt,
+  isolates = TRUE,
+  main = "HMSC co-occurrence"
 )
 
 plot(
@@ -461,7 +678,7 @@ plot(
   edge.color = edge_colors_true_compt,
   isolates = TRUE,
   edge.width = edge_widths_true_compt,
-  main = "simulated co-occurence"
+  main = "Simulated (truth)"
 )
 
 par(par_old)
@@ -470,12 +687,20 @@ par(par_old)
 ```{r}
 dist_mat_true_compt <- 1 - true_mat_compt
 dist_mat_mrIML_compt <- 1 - mrIML_mat_compt
-mantel_result <- vegan::mantel(
+mantel_mrIML_compt <- vegan::mantel(
   as.dist(dist_mat_true_compt),
   as.dist(dist_mat_mrIML_compt),
-  method = "pearson"
+  method = "spearman"
 )
-mantel_result
+mantel_mrIML_compt
+
+dist_mat_hmsc_compt <- 1 - hmsc_mat_compt
+mantel_hmsc_compt <- vegan::mantel(
+  as.dist(dist_mat_true_compt),
+  as.dist(dist_mat_hmsc_compt),
+  method = "spearman"
+)
+mantel_hmsc_compt
 ```
 
 ## Mixed
@@ -578,8 +803,65 @@ edge_colors_true_mix <- ifelse(
 edge_widths_true_mix <- abs(E(g_true_mix)$weight) * 5 # Adjust the scaling factor as needed
 
 layout1_mix <- layout_nicely(g_true_mix)
+```
 
-par_old <- par(mfrow = c(1, 2))
+```{r}
+#| results: 'hide'
+studyDesign_mix <- data.frame(sample = factor(1:nrow(Y_mix)))
+rL_mix <- HmscRandomLevel(units = studyDesign_mix$sample)
+m_hmsc_mix <- Hmsc(
+  Y           = as.matrix(Y_mix),
+  XFormula    = ~1,
+  XData       = data.frame(intercept = rep(1, nrow(Y_mix))),
+  distr       = "probit",
+  studyDesign = studyDesign_mix,
+  ranLevels   = list("sample" = rL_mix)
+)
+m_hmsc_mix <- sampleMcmc(
+  m_hmsc_mix,
+  thin      = 50,
+  samples   = 1000,
+  transient = 5000,
+  nChains   = 4,
+  verbose   = 0
+)
+```
+
+```{r}
+mpost_mix <- convertToCodaObject(m_hmsc_mix)
+psrf_mix <- gelman.diag(mpost_mix$Omega[[1]], multivariate = FALSE)$psrf
+psrf_mix
+```
+
+```{r}
+#| results: 'asis'
+if (any(psrf_mix[, "Point est."] > 1.1)) {
+  cat("::: {.callout-warning}\n")
+  cat("**HMSC convergence concern:** One or more Omega parameters have Rhat > 1.1,")
+  cat(" indicating incomplete chain mixing. Interpret these results cautiously.\n")
+  cat(":::\n")
+}
+```
+
+```{r}
+assoc_mix <- computeAssociations(m_hmsc_mix)[[1]]
+OmegaCor_mix <- assoc_mix$mean
+OmegaCor_mix[assoc_mix$support > 0.05 & assoc_mix$support < 0.95] <- 0
+hmsc_species_names_mix <- paste0("sp", rownames(mrIML_mat_mix))
+hmsc_mat_mix <- OmegaCor_mix[hmsc_species_names_mix, hmsc_species_names_mix]
+rownames(hmsc_mat_mix) <- rownames(mrIML_mat_mix)
+colnames(hmsc_mat_mix) <- rownames(mrIML_mat_mix)
+
+g_hmsc_mix <- graph_from_adjacency_matrix(
+  hmsc_mat_mix,
+  mode     = "undirected",
+  weighted = TRUE,
+  diag     = FALSE
+)
+edge_colors_hmsc_mix <- ifelse(E(g_hmsc_mix)$weight < 0, yes = "red", no = "blue")
+edge_widths_hmsc_mix <- abs(E(g_hmsc_mix)$weight) * 10
+
+par_old <- par(mfrow = c(1, 3))
 
 plot(
   g_mrIML_mix,
@@ -587,7 +869,16 @@ plot(
   edge.color = edge_colors_mrIML_mix,
   edge.width = edge_widths_mrIML_mix,
   isolates = TRUE,
-  main = "mrIML co-occurence"
+  main = "mrIML co-occurrence"
+)
+
+plot(
+  g_hmsc_mix,
+  layout = layout1_mix,
+  edge.color = edge_colors_hmsc_mix,
+  edge.width = edge_widths_hmsc_mix,
+  isolates = TRUE,
+  main = "HMSC co-occurrence"
 )
 
 plot(
@@ -596,7 +887,7 @@ plot(
   edge.color = edge_colors_true_mix,
   isolates = TRUE,
   edge.width = edge_widths_true_mix,
-  main = "simulated co-occurence"
+  main = "Simulated (truth)"
 )
 
 par(par_old)
@@ -605,12 +896,60 @@ par(par_old)
 ```{r}
 dist_mat_true_mix <- 1 - true_mat_mix
 dist_mat_mrIML_mix <- 1 - mrIML_mat_mix
-mantel_result <- vegan::mantel(
+mantel_mrIML_mix <- vegan::mantel(
   as.dist(dist_mat_true_mix),
   as.dist(dist_mat_mrIML_mix),
-  method = "pearson"
+  method = "spearman"
 )
-mantel_result
+mantel_mrIML_mix
+
+dist_mat_hmsc_mix <- 1 - hmsc_mat_mix
+mantel_hmsc_mix <- vegan::mantel(
+  as.dist(dist_mat_true_mix),
+  as.dist(dist_mat_hmsc_mix),
+  method = "spearman"
+)
+mantel_hmsc_mix
+```
+
+## Summary
+
+Comparison of Mantel r (Pearson) and p-values for mrIML and HMSC against the true interaction network across all simulation scenarios.
+
+```{r}
+comparison_table <- tibble(
+  Scenario = c("Random", "Mutualistic", "Competitive", "Mixed"),
+  mrIML_r  = round(c(
+    mantel_mrIML$statistic,
+    mantel_mrIML_mutual$statistic,
+    mantel_mrIML_compt$statistic,
+    mantel_mrIML_mix$statistic
+  ), 3),
+  mrIML_p  = c(
+    mantel_mrIML$signif,
+    mantel_mrIML_mutual$signif,
+    mantel_mrIML_compt$signif,
+    mantel_mrIML_mix$signif
+  ),
+  HMSC_r   = round(c(
+    mantel_hmsc$statistic,
+    mantel_hmsc_mutual$statistic,
+    mantel_hmsc_compt$statistic,
+    mantel_hmsc_mix$statistic
+  ), 3),
+  HMSC_p   = c(
+    mantel_hmsc$signif,
+    mantel_hmsc_mutual$signif,
+    mantel_hmsc_compt$signif,
+    mantel_hmsc_mix$signif
+  )
+)
+
+DT::datatable(
+  comparison_table,
+  colnames = c("Scenario", "mrIML r", "mrIML p", "HMSC r", "HMSC p"),
+  options  = list(pageLength = 10, dom = "t")
+)
 ```
 
 # Asymetric simulations
